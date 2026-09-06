@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>応募する｜有料老人ホーム グランコース成城 | かいごしごと</title>
+<meta name="description" content="有料老人ホーム グランコース成城の求人への応募フォームです。会員登録は不要、5ステップで応募が完了します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <input type="checkbox" id="navToggle" class="nav-toggle">
+  <div class="header-row">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.7 9 2 5.5 5.5 5c2-.3 3.5 1 4.5 2.3C11 6 12.5 4.7 14.5 5c3.5.5 4.8 4 3 7.5C15 16.65 12 21 12 21z"/></svg></span>
+      <span><span class="brand-name">かいごしごと</span><span class="brand-tag">介護施設で働く人のための求人サイト</span></span>
+    </a>
+    <nav class="primary">
+      <a href="list.html">求人を探す</a>
+      <a href="column.html">コラム</a>
+      <a href="faq.html">よくある質問</a>
+      <a href="about.html">サイトについて</a>
+      <a href="contact-company.html">掲載のお問い合わせ</a>
+    </nav>
+    <div class="header-cta">
+      <label for="navToggle" class="nav-burger" aria-label="メニューを開く"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h1 class="sr-only">応募フォーム</h1>
+      <div class="breadcrumb"><a href="index.html">TOP</a> ＞ <a href="job-5.html">求人詳細</a> ＞ 応募する</div>
+
+      <div class="wizard-wrap">
+        <div>
+          <button type="button" class="wizard-back" id="wizardBack">‹ 戻る</button>
+
+          <div class="step-indicator">
+            <div class="step-dot current" data-dot="1">1</div><div class="step-line" data-line="1"></div>
+            <div class="step-dot" data-dot="2">2</div><div class="step-line" data-line="2"></div>
+            <div class="step-dot" data-dot="3">3</div><div class="step-line" data-line="3"></div>
+            <div class="step-dot" data-dot="4">4</div><div class="step-line" data-line="4"></div>
+            <div class="step-dot" data-dot="5">5</div>
+          </div>
+
+          <div class="wizard-step active" data-step="1">
+            <div class="wizard-q">🔍 ご経験を教えてください</div>
+            <div class="tile-grid">
+              <div class="tile">特別養護老人ホーム</div>
+              <div class="tile">介護老人保健施設</div>
+              <div class="tile">有料老人ホーム・サ高住</div>
+              <div class="tile">デイサービス</div>
+              <div class="tile">訪問介護</div>
+              <div class="tile">グループホーム</div>
+              <div class="tile">経験なし</div>
+            </div>
+            <button type="button" class="wizard-next" data-next="2"><span class="sub">あと4ステップで完了！</span>次のステップへ</button>
+          </div>
+
+          <div class="wizard-step" data-step="2">
+            <div class="wizard-q">📋 お持ちの資格を教えてください</div>
+            <div class="tile-grid">
+              <div class="tile">介護福祉士</div>
+              <div class="tile">初任者研修・実務者研修</div>
+              <div class="tile">介護支援専門員</div>
+              <div class="tile">看護師・准看護師</div>
+              <div class="tile" style="grid-column:span 2;">該当なし</div>
+            </div>
+            <button type="button" class="wizard-next" data-next="3"><span class="sub">あと3ステップで完了！</span>次のステップへ</button>
+          </div>
+
+          <div class="wizard-step" data-step="3">
+            <div class="wizard-q">📅 ご希望の転職時期を教えてください</div>
+            <div class="tile-grid">
+              <div class="tile">1ヶ月以内</div>
+              <div class="tile">3ヶ月以内</div>
+              <div class="tile">6ヶ月以内</div>
+              <div class="tile">1年以内</div>
+              <div class="tile" style="grid-column:span 2;">良い求人があればすぐ</div>
+            </div>
+            <div class="wizard-field">
+              <label for="pref">📍 お住まいを教えてください</label>
+              <select id="pref">
+                <option>都道府県を選ぶ</option>
+                <option>東京都</option><option>神奈川県</option><option>大阪府</option><option>愛知県</option>
+                <option>福岡県</option><option>北海道</option><option>埼玉県</option><option>千葉県</option>
+              </select>
+            </div>
+            <button type="button" class="wizard-next" data-next="4"><span class="sub">あと2ステップで完了！</span>次のステップへ</button>
+          </div>
+
+          <div class="wizard-step" data-step="4">
+            <div class="wizard-q">👤 お名前と生まれ年を入力してください</div>
+            <div class="wizard-field">
+              <label for="wname">お名前</label>
+              <input id="wname" type="text" placeholder="例：介護 花子">
+            </div>
+            <div class="wizard-field">
+              <label for="wyear">生まれ年</label>
+              <select id="wyear">
+                <option>選択してください</option>
+              </select>
+            </div>
+            <button type="button" class="wizard-next" data-next="5"><span class="sub">あと1ステップで完了！</span>次のステップへ</button>
+          </div>
+
+          <div class="wizard-step" data-step="5">
+            <div class="wizard-q">📞 連絡先を教えてください</div>
+            <div class="wizard-field">
+              <label for="wtel">電話番号</label>
+              <input id="wtel" type="tel" placeholder="例：090-1234-5678">
+            </div>
+            <div class="wizard-field">
+              <label for="wemail">メールアドレス</label>
+              <input id="wemail" type="email" placeholder="例：hanako@example.com">
+            </div>
+            <div class="wizard-field">
+              <label for="wresume">履歴書・職務経歴書（任意）</label>
+              <input id="wresume" type="file" accept=".pdf,.doc,.docx">
+            </div>
+            <button type="button" class="wizard-next wizard-final" id="wizardSubmit">この内容で応募を完了する</button>
+          </div>
+
+          <div class="wizard-step" data-step="done">
+            <div class="wizard-done">
+              <div class="check-circle"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              <h2 style="font-size:1.3rem;margin-bottom:10px;">応募が完了しました</h2>
+              <p style="color:var(--ink-soft);font-size:0.9rem;">応募企業の採用担当者より、3営業日以内にご連絡いたします。<br>（このページはデザイン案のため、実際には送信されません）</p>
+              <a href="index.html" class="btn btn-warm" style="margin-top:24px;display:inline-block;">TOPへ戻る</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="job-summary-card">
+          <h4>あなたの応募する求人</h4>
+          <div class="job-summary-photo" style="background-image:url('../assets/img/cat-yuuryou.jpg')"></div>
+          <div class="title">ケアマネージャー（正社員）</div>
+          <div class="facility">有料老人ホーム グランコース成城</div>
+          <div class="meta">
+            <div>勤務地：<span>東京都世田谷区◯◯</span></div>
+            <div>雇用形態：<span>正社員</span></div>
+            <div>給与：<span>月給26〜32万円</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-bottom" style="border-top:1px solid var(--line);padding-top:20px;"><span>© 2026 かいごしごと</span><span>介護施設で働く人のための求人サイト</span></div>
+</footer>
+
+<script>
+(function(){
+  const steps = Array.from(document.querySelectorAll('.wizard-step'));
+  const dots = Array.from(document.querySelectorAll('.step-dot'));
+  const lines = Array.from(document.querySelectorAll('.step-line'));
+  const backBtn = document.getElementById('wizardBack');
+  let current = 1;
+
+  function show(stepKey){
+    steps.forEach(s => s.classList.toggle('active', s.dataset.step === String(stepKey)));
+    if(stepKey === 'done'){
+      dots.forEach(d => { d.classList.add('done'); d.classList.remove('current'); d.textContent = '✓'; });
+      lines.forEach(l => l.classList.add('done'));
+      backBtn.style.visibility = 'hidden';
+      return;
+    }
+    dots.forEach(d=>{
+      const n = Number(d.dataset.dot);
+      d.classList.toggle('current', n === stepKey);
+      d.classList.toggle('done', n < stepKey);
+      d.textContent = n < stepKey ? '✓' : n;
+    });
+    lines.forEach(l=>{
+      l.classList.toggle('done', Number(l.dataset.line) < stepKey);
+    });
+    backBtn.style.visibility = stepKey === 1 ? 'hidden' : 'visible';
+  }
+
+  document.querySelectorAll('.tile-grid').forEach(grid=>{
+    grid.addEventListener('click', (e)=>{
+      const tile = e.target.closest('.tile');
+      if(!tile) return;
+      grid.querySelectorAll('.tile').forEach(t=>t.classList.remove('selected'));
+      tile.classList.add('selected');
+    });
+  });
+
+  document.querySelectorAll('.wizard-next[data-next]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      current = Number(btn.dataset.next);
+      show(current);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  backBtn.addEventListener('click', ()=>{
+    if(current > 1){ current -= 1; show(current); }
+  });
+
+  document.getElementById('wizardSubmit').addEventListener('click', ()=>{
+    show('done');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  const yearSelect = document.getElementById('wyear');
+  for(let y=2006; y>=1955; y--){
+    const opt = document.createElement('option');
+    opt.textContent = y;
+    yearSelect.appendChild(opt);
+  }
+
+  show(current);
+})();
+</script>
+
+</body>
+</html>

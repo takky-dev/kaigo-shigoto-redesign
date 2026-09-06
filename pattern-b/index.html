@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>かいごしごと | 介護施設で働く人のための求人サイト</title>
+<meta name="description" content="介護施設で働く人のための求人サイト。特養・老健・デイサービス・訪問介護まで、経験や資格を活かせる求人だけを集めました。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <input type="checkbox" id="navToggle" class="nav-toggle">
+  <div class="header-row">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.7 9 2 5.5 5.5 5c2-.3 3.5 1 4.5 2.3C11 6 12.5 4.7 14.5 5c3.5.5 4.8 4 3 7.5C15 16.65 12 21 12 21z"/></svg></span>
+      <span><span class="brand-name">かいごしごと</span><span class="brand-tag">介護施設で働く人のための求人サイト</span></span>
+    </a>
+    <nav class="primary">
+      <a href="list.html">求人を探す</a>
+      <a href="column.html">コラム</a>
+      <a href="faq.html">よくある質問</a>
+      <a href="about.html">サイトについて</a>
+      <a href="contact-company.html">掲載のお問い合わせ</a>
+    </nav>
+    <div class="header-cta">
+      <label for="navToggle" class="nav-burger" aria-label="メニューを開く"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">介護のお仕事探しなら</span>
+        <h1>自分らしく働ける<br>現場が、見つかる。</h1>
+        <ul class="check-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>無資格・未経験の求人も多数</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>2クリックでカンタン応募</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>夜勤なしの求人も選べる</li>
+        </ul>
+        <div class="btnrow">
+          <a href="#jobs" class="btn btn-warm">求人を探す</a>
+        </div>
+      </div>
+      <div class="photo-wrap">
+        <div class="photo" style="background-image:url('../assets/img/hero-main.jpg')"></div>
+        <div class="float-badge b1">✓ 未経験OK</div>
+        <div class="float-badge b2">✓ 夜勤なし相談可</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap search-overlap">
+      <form class="search-card" action="list.html" method="get">
+        <div class="search-row">
+          <div class="field">
+            <label for="kw">キーワード</label>
+            <input id="kw" type="text" placeholder="介護職員 / ケアマネ / 特養 など">
+          </div>
+          <div class="field">
+            <label for="areaSelect">エリア</label>
+            <select id="areaSelect">
+              <option>エリアを選ぶ</option>
+              <option>東京都</option><option>神奈川県</option><option>大阪府</option><option>愛知県</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="emp">雇用形態</label>
+            <select id="emp">
+              <option>指定なし</option>
+              <option>正社員</option><option>パート・アルバイト</option><option>契約社員</option>
+            </select>
+          </div>
+          <button class="search-btn" type="submit">求人を検索</button>
+        </div>
+        <div class="stat-strip">
+          <div><div class="stat-num mono">6,524件</div><div class="stat-label">掲載求人数</div></div>
+          <div><div class="stat-num mono">890社</div><div class="stat-label">掲載企業数</div></div>
+          <div><div class="stat-num mono">156件</div><div class="stat-label">本日の新着</div></div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="fields" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="kicker">WORKPLACE</span><h2>現場から探す</h2></div>
+        <a href="list.html" class="see-all">すべての現場を見る →</a>
+      </div>
+      <div class="cat-grid">
+        <a href="list.html" class="cat-card"><span class="cat-icon" style="background-image:url('../assets/img/cat-tokuyou.jpg')"></span><div class="name">特別養護老人ホーム</div><div class="count">1,842件</div></a>
+        <a href="list.html" class="cat-card"><span class="cat-icon" style="background-image:url('../assets/img/cat-roken.jpg')"></span><div class="name">介護老人保健施設</div><div class="count">968件</div></a>
+        <a href="list.html" class="cat-card"><span class="cat-icon" style="background-image:url('../assets/img/cat-yuuryou.jpg')"></span><div class="name">有料老人ホーム</div><div class="count">1,204件</div></a>
+        <a href="list.html" class="cat-card"><span class="cat-icon" style="background-image:url('../assets/img/cat-sakoju.jpg')"></span><div class="name">サービス付き高齢者向け住宅</div><div class="count">756件</div></a>
+        <a href="list.html" class="cat-card"><span class="cat-icon" style="background-image:url('../assets/img/cat-day.jpg')"></span><div class="name">デイサービス・デイケア</div><div class="count">1,120件</div></a>
+        <a href="list.html" class="cat-card"><span class="cat-icon" style="background-image:url('../assets/img/cat-houmon.jpg')"></span><div class="name">訪問介護</div><div class="count">634件</div></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="jobs">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="kicker">PICK UP</span><h2>掲載中の求人例</h2></div>
+        <a href="list.html" class="see-all">すべての求人を見る →</a>
+      </div>
+      <p class="listing-note">※施設名・条件は本デザイン案のための掲載例です。実際の求人ではありません。</p>
+      <div class="job-grid">
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-tokuyou.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">特別養護老人ホーム さくらの里</div><div class="job-title">介護職員・ヘルパー（正社員）</div></div><div class="job-salary">月給21〜25万円</div></div>
+          <div class="badge-row"><span class="badge">未経験歓迎</span><span class="badge warm">資格取得支援あり</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>神奈川県横浜市</span></div><div><dt>施設種別</dt><span>特別養護老人ホーム</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>シフト制・年間120日</span></div></div>
+          <div class="tag-row"><span class="tag">夜勤あり</span><span class="tag">車通勤可</span><span class="tag">賞与年2回</span></div>
+          <a href="job.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-roken.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">介護老人保健施設 あおば苑</div><div class="job-title">生活相談員（正社員）</div></div><div class="job-salary">月給23〜27万円</div></div>
+          <div class="badge-row"><span class="badge">経験者優遇</span><span class="badge warm">土日祝休み</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>東京都世田谷区</span></div><div><dt>施設種別</dt><span>介護老人保健施設</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>土日祝休み・年間休日115日</span></div></div>
+          <div class="tag-row"><span class="tag">日勤のみ</span><span class="tag">駅徒歩5分</span><span class="tag">残業ほぼなし</span></div>
+          <a href="job-2.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-sakoju.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">サービス付き高齢者向け住宅 陽だまりコート</div><div class="job-title">介護職員・ヘルパー（パート可）</div></div><div class="job-salary">時給1,300円〜</div></div>
+          <div class="badge-row"><span class="badge">扶養内勤務OK</span><span class="badge warm">週2日〜OK</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>千葉県船橋市</span></div><div><dt>施設種別</dt><span>サービス付き高齢者向け住宅</span></div><div><dt>雇用形態</dt><span>パート・アルバイト</span></div><div><dt>休日</dt><span>シフト制・希望考慮</span></div></div>
+          <div class="tag-row"><span class="tag">夜勤なし</span><span class="tag">無資格OK</span><span class="tag">駅徒歩3分</span></div>
+          <a href="job-3.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-day.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">デイサービスセンター ひまわり</div><div class="job-title">介護職員・ヘルパー（正社員）</div></div><div class="job-salary">月給20〜23万円</div></div>
+          <div class="badge-row"><span class="badge">未経験歓迎</span><span class="badge warm">日勤のみ</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>埼玉県さいたま市</span></div><div><dt>施設種別</dt><span>デイサービス・デイケア</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>週休2日・年間休日118日</span></div></div>
+          <div class="tag-row"><span class="tag">夜勤なし</span><span class="tag">送迎あり</span><span class="tag">残業ほぼなし</span></div>
+          <a href="job-4.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="kicker">NEW</span><h2>新着求人</h2></div>
+        <a href="list.html" class="see-all">すべての求人を見る →</a>
+      </div>
+      <div class="job-grid">
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-yuuryou.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">有料老人ホーム グランコース成城</div><div class="job-title">ケアマネージャー（正社員）</div></div><div class="job-salary">月給26〜32万円</div></div>
+          <div class="badge-row"><span class="badge">経験者優遇</span><span class="badge warm">賞与年2回</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>東京都世田谷区</span></div><div><dt>施設種別</dt><span>有料老人ホーム</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>週休2日制・年間休日120日</span></div></div>
+          <div class="tag-row"><span class="tag">日勤のみ</span><span class="tag">駅徒歩7分</span><span class="tag">残業少なめ</span></div>
+          <a href="job-5.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-houmon.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">訪問介護ステーション こもれび</div><div class="job-title">サービス提供責任者（正社員）</div></div><div class="job-salary">月給24〜28万円</div></div>
+          <div class="badge-row"><span class="badge">介護福祉士歓迎</span><span class="badge warm">車通勤可</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>大阪府大阪市</span></div><div><dt>施設種別</dt><span>訪問介護</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>週休2日制・年間休日115日</span></div></div>
+          <div class="tag-row"><span class="tag">直行直帰OK</span><span class="tag">社用車あり</span><span class="tag">昇給あり</span></div>
+          <a href="job-6.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-tokuyou.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">グループホーム 結の家</div><div class="job-title">施設長・管理者候補（正社員）</div></div><div class="job-salary">月給28〜34万円</div></div>
+          <div class="badge-row"><span class="badge">管理職経験歓迎</span><span class="badge warm">将来の施設長候補</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>福岡県福岡市</span></div><div><dt>施設種別</dt><span>グループホーム</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>シフト制・年間休日115日</span></div></div>
+          <div class="tag-row"><span class="tag">少人数制</span><span class="tag">裁量大</span><span class="tag">住宅手当あり</span></div>
+          <a href="job-7.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <div class="job-photo" style="background-image:url('../assets/img/cat-tokuyou.jpg')"></div>
+          <div class="job-top"><div><div class="job-facility">特別養護老人ホーム みのりの丘</div><div class="job-title">看護師（施設内・正社員）</div></div><div class="job-salary">月給27〜33万円</div></div>
+          <div class="badge-row"><span class="badge">オンコールなし</span><span class="badge warm">日勤のみ相談可</span></div>
+          <div class="spec-list"><div><dt>勤務地</dt><span>神奈川県川崎市</span></div><div><dt>施設種別</dt><span>特別養護老人ホーム</span></div><div><dt>雇用形態</dt><span>正社員</span></div><div><dt>休日</dt><span>シフト制・年間休日120日</span></div></div>
+          <div class="tag-row"><span class="tag">夜勤なし相談可</span><span class="tag">駅徒歩8分</span><span class="tag">賞与年2回</span></div>
+          <a href="job-8.html" class="job-cta">求人の詳細を見る →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><div><span class="kicker">CONDITION</span><h2>人気の条件から探す</h2></div></div>
+      <div class="chip-wrap">
+        <a href="list.html" class="chip">未経験OK</a><a href="list.html" class="chip">無資格OK</a><a href="list.html" class="chip">夜勤なし</a><a href="list.html" class="chip">日勤のみ</a><a href="list.html" class="chip">週2日〜OK</a><a href="list.html" class="chip">資格取得支援あり</a><a href="list.html" class="chip">賞与あり</a><a href="list.html" class="chip">車通勤OK</a><a href="list.html" class="chip">駅徒歩10分以内</a><a href="list.html" class="chip">ブランクOK</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="area">
+    <div class="wrap">
+      <div class="section-head"><div><span class="kicker">AREA</span><h2>エリアから探す</h2></div></div>
+      <div class="chip-wrap">
+        <a href="list.html" class="chip">東京都</a><a href="list.html" class="chip">神奈川県</a><a href="list.html" class="chip">大阪府</a><a href="list.html" class="chip">埼玉県</a><a href="list.html" class="chip">千葉県</a><a href="list.html" class="chip">福岡県</a><a href="list.html" class="chip">愛知県</a><a href="list.html" class="chip">北海道</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head"><div><span class="kicker">VOICE</span><h2>利用者の声</h2></div></div>
+      <p class="listing-note" style="margin-top:-20px;">※ご紹介する体験談は、本デザイン案のためのサンプルです。実在する利用者の声ではありません。</p>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-top"><span class="testi-meta">神奈川県・30代</span><span class="testi-stars">★★★★★</span></div>
+          <div class="testi-change">転職前：<b>介護職員（訪問介護）</b> → 転職後：<b>介護職員（特別養護老人ホーム）</b></div>
+          <p class="testi-body">夜勤の負担が少ない施設を探していて、求人票の「夜勤あり」の頻度まで細かく書かれていたのが決め手でした。実際に入職してからも記載通りで、安心して働けています。</p>
+        </div>
+        <div class="testi-card">
+          <div class="testi-top"><span class="testi-meta">東京都・40代</span><span class="testi-stars">★★★★★</span></div>
+          <div class="testi-change">転職前：<b>販売職（未経験）</b> → 転職後：<b>介護職員（デイサービス）</b></div>
+          <p class="testi-body">無資格・未経験可の求人で、研修制度がしっかりしている施設を選びました。会員登録なしでその場で応募できたので、思い立ってすぐ行動できたのが良かったです。</p>
+        </div>
+        <div class="testi-card">
+          <div class="testi-top"><span class="testi-meta">福岡県・20代</span><span class="testi-stars">★★★★☆</span></div>
+          <div class="testi-change">転職前：<b>介護職員（有料老人ホーム）</b> → 転職後：<b>サービス提供責任者（訪問介護）</b></div>
+          <p class="testi-body">キャリアアップしたいタイミングで、条件を絞り込んで比較できたので効率よく探せました。面接での確認ポイントがコラムに書かれていたのも参考になりました。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="why" class="alt">
+    <div class="wrap">
+      <div class="section-head"><div><span class="kicker">WHY US</span><h2>かいごしごと が選ばれる理由</h2></div></div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <h3>特養から訪問介護まで、求人の幅が広い</h3>
+          <p>特別養護老人ホーム・老健・有料老人ホーム・デイサービス・訪問介護まで、介護施設で働く人の求人だけを毎日更新して掲載しています。</p>
+          <ul><li>掲載求人数 6,524件（毎日更新）</li><li>掲載企業数 890社</li><li>対応エリア 全国8都道府県</li></ul>
+        </div>
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <h3>2クリックでカンタン応募</h3>
+          <p>会員登録は不要。気になる求人があれば、その場で応募フォームからすぐに応募できます。</p>
+          <ul><li>入力はタイル選択が中心、最短1分</li><li>スマートフォンからも同じ手順で応募可能</li><li>応募後は3営業日以内に採用担当者からご連絡</li></ul>
+        </div>
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <h3>掲載前に確認済みの求人だけ</h3>
+          <p>掲載前に募集内容を確認したうえで公開しています。求人票と実際の条件に相違があった場合は、掲載企業に確認のうえ速やかに対応します。</p>
+          <ul><li>給与・勤務条件を掲載前にチェック</li><li>内容に変更があれば随時更新</li><li>気になる点は掲載企業へお問い合わせから確認可能</li></ul>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:56px;"><div><span class="kicker">FAQ</span><h2>よくある質問</h2></div></div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <p class="faq-q"><span class="qmark">Q.</span>会員登録は必要ですか？</p>
+          <p class="faq-a"><span class="amark">A.</span>いいえ、会員登録は不要です。気になる求人があれば、その場で応募フォームに進んでいただけます。</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="qmark">Q.</span>応募後、いつ頃連絡がありますか？</p>
+          <p class="faq-a"><span class="amark">A.</span>応募企業の採用担当者より、3営業日以内にご連絡いたします。1週間以上経っても連絡がない場合は、お手数ですが下記お問い合わせよりご連絡ください。</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="qmark">Q.</span>資格や経験がなくても応募できますか？</p>
+          <p class="faq-a"><span class="amark">A.</span>はい。無資格・未経験歓迎の求人も多数掲載しています。応募フォームで「資格なし」「経験なし」を選んでご応募いただけます。</p>
+        </div>
+      </div>
+      <a href="faq.html" class="see-all" style="display:inline-block;margin-top:20px;">よくある質問をもっと見る →</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>会員登録なしで、今すぐ応募できます。</h2>
+          <p>掲載求人は毎日更新。気になる求人があれば、その場で応募フォームに進めます。</p>
+        </div>
+        <a href="list.html" class="btn btn-warm">求人を探す</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:10px;"><span class="brand-mark" style="width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.7 9 2 5.5 5.5 5c2-.3 3.5 1 4.5 2.3C11 6 12.5 4.7 14.5 5c3.5.5 4.8 4 3 7.5C15 16.65 12 21 12 21z"/></svg></span><span class="brand-name" style="font-size:1.05rem;">かいごしごと</span></div>
+      <p style="font-size:0.82rem;color:var(--ink-soft);max-width:32ch;">介護施設で働く人のための求人サイト。経験を、いちばん活きる現場へ。</p>
+    </div>
+    <div><h4>求人を探す</h4><ul><li><a href="list.html">特別養護老人ホーム</a></li><li><a href="list.html">介護老人保健施設</a></li><li><a href="list.html">デイサービス</a></li><li><a href="list.html">訪問介護</a></li></ul></div>
+    <div><h4>サイトについて</h4><ul><li><a href="about.html">かいごしごととは</a></li><li><a href="column.html">コラム</a></li><li><a href="faq.html">よくある質問</a></li><li><a href="index.html#why">選ばれる理由</a></li></ul></div>
+    <div><h4>企業の方へ</h4><ul><li><a href="contact-company.html">掲載のお問い合わせ</a></li><li><a href="terms.html">利用規約</a></li><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div>
+  </div>
+  <div class="wrap foot-bottom"><span>© 2026 かいごしごと</span><span>介護施設で働く人のための求人サイト</span></div>
+</footer>
+
+<div class="mobile-cta">
+  <a href="list.html" class="btn btn-warm" style="width:100%;">求人を探す</a>
+</div>
+
+</body>
+</html>
