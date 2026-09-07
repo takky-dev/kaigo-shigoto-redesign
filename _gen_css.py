@@ -29,7 +29,7 @@ BASE = r"""
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;
   overflow-x:hidden;overflow-x:clip;background:var(--bg);}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
-  font-size:15px;line-height:1.75;font-feature-settings:"palt" 1;}
+  font-size:16px;line-height:1.8;font-feature-settings:"palt" 1;}
 img{max-width:100%;display:block;}
 a{color:inherit;}
 button{font:inherit;cursor:pointer;}
@@ -745,7 +745,6 @@ table{border-collapse:collapse;width:100%;}
   .recent-list{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:720px){
-  body{font-size:14.5px;}
   .band{padding:40px 0;}
   .band-head h2{font-size:1.24rem;}
   .yakinhero{padding-top:26px;}

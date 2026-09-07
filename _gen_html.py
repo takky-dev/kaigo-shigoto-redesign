@@ -181,7 +181,6 @@ def card_dense(j, compact=False):
         flags.append("1日の流れ掲載")
     if j["has_voice"]:
         flags.append("働く人の声あり")
-    flags.append(f"写真{j['photo_count']}枚")
     flag_html = "".join(f'<span class="has-flag">{e(t)}</span>' for t in flags)
 
     if compact:
