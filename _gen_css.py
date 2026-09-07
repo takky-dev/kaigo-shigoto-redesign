@@ -453,9 +453,13 @@ table{border-collapse:collapse;width:100%;}
   font-weight:700;}
 
 /* ================================================== 人気条件ランキング（C用） */
-.rankgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;}
-.rank{display:flex;align-items:center;gap:14px;padding:11px 0;
-  border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);}
+/* 件数は数字だけでなくバーの長さでも見せる。行の背景として敷いている */
+.ranklist{display:grid;gap:2px;}
+.rank{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;
+  padding:12px 14px;border-radius:var(--radius-s);
+  text-decoration:none;color:var(--ink);background:var(--surface-alt);}
+.rank-fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent-tint);}
+.rank > *:not(.rank-fill){position:relative;z-index:1;}
 .rank:hover .rank-name{color:var(--accent);text-decoration:underline;}
 .rank-no{font-family:var(--font-num);font-size:0.86rem;font-weight:700;color:var(--accent-ink);
   background:var(--accent);width:24px;height:24px;display:grid;place-items:center;
@@ -463,6 +467,39 @@ table{border-collapse:collapse;width:100%;}
 .rank.top .rank-no{background:var(--warm);}
 .rank-name{font-size:0.88rem;font-weight:600;}
 .rank-count{margin-left:auto;font-family:var(--font-num);font-size:0.84rem;color:var(--ink-soft);}
+
+/* 続きを開く（JSなしで動き、キーボードでも操作できる） */
+.more{margin-top:12px;}
+.more > summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+  font-size:0.82rem;font-weight:700;color:var(--accent);padding:9px 16px;
+  border:1px solid var(--line-strong);border-radius:99px;background:var(--surface);}
+.more > summary::-webkit-details-marker{display:none;}
+.more > summary:hover{border-color:var(--accent);}
+.more > summary::after{content:"＋";font-weight:700;}
+.more[open] > summary::after{content:"−";}
+.more[open] .more-open{display:none;}
+.more:not([open]) .more-close{display:none;}
+.more > *:not(summary){margin-top:10px;}
+
+/* エリア別も件数をバーで見せる */
+.arealist{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
+.arealist a{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:var(--radius-s);background:var(--surface);
+  border:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:0.84rem;}
+.arealist a:hover{border-color:var(--accent);}
+.ar-fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent-tint);}
+.arealist a > *:not(.ar-fill){position:relative;z-index:1;}
+.ar-n{font-weight:600;}
+.arealist .c{margin-left:auto;font-family:var(--font-num);color:var(--ink-soft);font-size:0.8rem;}
+
+/* 夜勤の構成比バー（3つの件数が全体でどんな割合かを一目で） */
+.yakinshare{display:flex;height:10px;border-radius:99px;overflow:hidden;margin-top:20px;
+  background:rgba(255,255,255,.25);}
+.yakinshare .ys{display:block;height:100%;}
+.yakinshare .none{background:#7FB3A0;}
+.yakinshare .some{background:var(--warm);}
+.yakinshare .senju{background:#8EA4C8;}
+.yakinshare-l{margin-top:7px;font-size:0.74rem;color:var(--ink-faint);}
 
 /* ==================================================== 資格別 給与相場表（C用） */
 .souba{background:var(--surface);border:1px solid var(--line);font-size:0.83rem;}
@@ -780,7 +817,7 @@ table{border-collapse:collapse;width:100%;}
     line-height:1.45;}
   .yakinhero-tail{height:34px;}
   .coverage{grid-template-columns:1fr;}
-  .guidegrid,.shisetsu-grid,.colgrid,.voicegrid,.relgrid,.rankgrid{grid-template-columns:1fr;}
+  .guidegrid,.shisetsu-grid,.colgrid,.voicegrid,.relgrid,.arealist{grid-template-columns:1fr;}
   .bcard{grid-template-columns:1fr;}
   /* スマホでは6枚ぶんの説明文が縦に積み上がって文字の壁になるため2行で止める */
   .b-why{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
@@ -790,7 +827,6 @@ table{border-collapse:collapse;width:100%;}
   .b-from::after{right:auto;left:22px;top:auto;bottom:-11px;transform:none;
     border-left:11px solid transparent;border-right:11px solid transparent;
     border-top:11px solid var(--bg-alt);border-bottom:0;}
-  .rankgrid{gap:0;}
   /* スマホは横並びにすると本文が潰れるため、写真を上に回して帯にする */
   .jrow{grid-template-columns:1fr;}
   .jrow .jrow-stripe{height:5px;}

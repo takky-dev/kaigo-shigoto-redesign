@@ -365,6 +365,12 @@ def hero_yakin():
         <img src="{img('hero-a-yakin.jpg')}" alt="夜勤明けの職員が、出勤してきた日勤の職員に申し送りをしている様子" loading="eager">
       </div>
     </div>
+    <div class="yakinshare" aria-hidden="true">
+      <span class="ys none" style="width:{D.YAKIN_AXIS[0][3] / D.TOTAL_JOBS * 100:.1f}%"></span>
+      <span class="ys some" style="width:{D.YAKIN_AXIS[1][3] / D.TOTAL_JOBS * 100:.1f}%"></span>
+      <span class="ys senju" style="width:{D.YAKIN_AXIS[2][3] / D.TOTAL_JOBS * 100:.1f}%"></span>
+    </div>
+    <p class="yakinshare-l">掲載求人の内訳：夜勤なし {D.YAKIN_AXIS[0][3] / D.TOTAL_JOBS * 100:.0f}%／夜勤あり {D.YAKIN_AXIS[1][3] / D.TOTAL_JOBS * 100:.0f}%／夜勤専従 {D.YAKIN_AXIS[2][3] / D.TOTAL_JOBS * 100:.0f}%</p>
     <div class="yakinpick">{''.join(picks)}</div>
   </div>
 </section>
@@ -779,23 +785,34 @@ def sec_table_jobs(p):
 
 
 def sec_popular(p):
+    # 件数はバーの長さで見せる。上位3件だけ出し、残りは開いたときに見せる。
     counts = [4820, 3892, 3186, 2148, 1862, 1420, 1204, 986, 824, 756, 634, 512]
-    ranks = []
-    for i, cond in enumerate(D.CONDITION_CHIPS[:12]):
+    mx = counts[0]
+
+    def row(i, cond):
         top = " top" if i < 3 else ""
-        ranks.append(f"""<a class="rank{top}" href="list.html">
+        w = round(counts[i] / mx * 100)
+        return f"""<a class="rank{top}" href="list.html">
+      <span class="rank-fill" style="width:{w}%"></span>
       <span class="rank-no">{i+1}</span>
       <span class="rank-name">{e(cond)}</span>
       <span class="rank-count">{fmt(counts[i])}件</span>
-    </a>""")
+    </a>"""
+
+    shown = "".join(row(i, c) for i, c in enumerate(D.CONDITION_CHIPS[:3]))
+    rest = "".join(row(i + 3, c) for i, c in enumerate(D.CONDITION_CHIPS[3:12]))
     return f"""<section class="band band-surface">
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">人気の条件</span>
       <h2>他の人は、まず何で絞っているか</h2>
-      <p class="lede">指定回数の多い順です。</p>
+      <p class="lede">バーの長さが指定回数です。</p>
     </div>
-    <div class="rankgrid">{''.join(ranks)}</div>
+    <div class="ranklist">{shown}</div>
+    <details class="more">
+      <summary><span class="more-open">4位以下も見る（9件）</span><span class="more-close">閉じる</span></summary>
+      <div class="ranklist">{rest}</div>
+    </details>
   </div>
 </section>"""
 
@@ -833,18 +850,29 @@ def sec_souba(p):
 
 
 def sec_area(p):
+    # 件数の大小はバーで見せる。上位5件だけ出し、残りは開いたときに見せる。
     counts = [842, 586, 548, 452, 418, 396, 364, 312, 298, 186]
-    links = "".join(
-        f'<a href="list.html">{e(a)}<span class="c">{fmt(counts[i])}</span></a>'
-        for i, a in enumerate(D.AREA_CHIPS)
-    )
+    mx = counts[0]
+
+    def row(i, a):
+        w = round(counts[i] / mx * 100)
+        return (f'<a href="list.html"><span class="ar-fill" style="width:{w}%"></span>'
+                f'<span class="ar-n">{e(a)}</span>'
+                f'<span class="c">{fmt(counts[i])}</span></a>')
+
+    shown = "".join(row(i, a) for i, a in enumerate(D.AREA_CHIPS[:5]))
+    rest = "".join(row(i + 5, a) for i, a in enumerate(D.AREA_CHIPS[5:]))
     return f"""<section class="band band-tint">
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">エリアから探す</span>
-      <h2>都道府県別の掲載件数（上位10件）</h2>
+      <h2>都道府県別の掲載件数</h2>
     </div>
-    <div class="areagrid">{links}</div>
+    <div class="arealist">{shown}</div>
+    <details class="more">
+      <summary><span class="more-open">6位以下も見る（5件）</span><span class="more-close">閉じる</span></summary>
+      <div class="arealist">{rest}</div>
+    </details>
   </div>
 </section>"""
 
