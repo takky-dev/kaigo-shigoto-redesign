@@ -270,8 +270,9 @@ table{border-collapse:collapse;width:100%;}
 .chip-shoku{font-size:0.7rem;font-weight:700;padding:3px 9px;border-radius:var(--radius-s);}
 .chip-yakin{font-size:0.7rem;font-weight:700;padding:3px 9px;border-radius:var(--radius-s);
   border:1px solid currentColor;}
-.chip-yakin.y-none{color:#1F7A5A;background:#E6F3EE;border-color:#9FCFBC;}
-.chip-yakin.y-some{color:var(--warm-strong);background:var(--warm-tint);border-color:var(--warm);}
+/* 夜勤ありを警告色にしない。昼＝淡い緑、夜＝藍。優劣ではなく時間帯の対比として扱う */
+.chip-yakin.y-none{color:#2C6B5A;background:#E9F2EF;border-color:#B4D0C7;}
+.chip-yakin.y-some{color:#3B4A78;background:#EDEFF8;border-color:#BFC7E2;}
 .chip-emp{font-size:0.7rem;color:var(--ink-soft);border:1px solid var(--line-strong);
   padding:3px 9px;border-radius:var(--radius-s);}
 .jrow-updated{margin-left:auto;font-size:0.7rem;color:var(--ink-faint);font-family:var(--font-num);}
@@ -360,9 +361,10 @@ table{border-collapse:collapse;width:100%;}
 .jt-pay{font-family:var(--font-num);font-weight:600;color:var(--warm-strong);white-space:nowrap;}
 .jt-paynote{font-size:0.7rem;color:var(--ink-faint);font-weight:400;margin-top:3px;
   white-space:normal;}
-.jt-yakin{display:inline-block;max-width:11em;font-weight:600;}
-.jt-yakin.y-none{color:#1F7A5A;}
-.jt-yakin.y-some{color:var(--warm-strong);}
+.jt-shift{min-width:10.5em;}
+.jt-yakin{display:inline-block;font-weight:600;word-break:auto-phrase;}
+.jt-yakin.y-none{color:#2C6B5A;}
+.jt-yakin.y-some{color:#3B4A78;}
 .jt-has{display:flex;flex-direction:column;gap:3px;font-size:0.72rem;}
 .jt-has .on{color:var(--accent);font-weight:600;}
 .jt-has .off{color:var(--ink-faint);}

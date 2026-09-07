@@ -274,7 +274,7 @@ def table_jobs(jobs):
     </td>
     <td><span class="jt-pay">{e(j['pay_main'])}</span>
       <p class="jt-paynote">{e(j['employment'])}</p></td>
-    <td><span class="jt-yakin {yakin_class(j)}">{e(j['shift'])}</span></td>
+    <td class="jt-shift"><span class="jt-yakin {yakin_class(j)}">{e(j['shift'])}</span></td>
     <td>{e(j['pref'])}<p class="jt-paynote">{e(shisetsu_of(j)[2])}</p></td>
     <td><div class="jt-has">{tl}{vo}</div></td>
     <td class="jt-updated">{e(j['updated'])}</td>
@@ -333,7 +333,12 @@ def hero_yakin():
 
 def hero_timeline():
     j = D.JOBS_BY_ID[1]
-    peek = j["timeline"][:4]
+    # 「1日が見える」と言う以上、出勤で切らずに退勤まで見せる。
+    # 全項目を出すと縦に伸びるため、始点と終点を含む4項目を等間隔で抜く。
+    tl = j["timeline"]
+    n = 4
+    idx = sorted({round(i * (len(tl) - 1) / (n - 1)) for i in range(n)})
+    peek = [tl[i] for i in idx]
     rows = "".join(f"""<div class="daily-row">
       <div class="daily-time">{e(t)}</div>
       <div class="daily-axis" aria-hidden="true"></div>
@@ -360,11 +365,11 @@ def hero_timeline():
       </div>
       <div class="thero-card-body">
         <div class="tc-top">
-          <span class="who">{e(j['timeline_label'])}</span>
+          <span class="who">{e(j['timeline_label'])}（抜粋）</span>
           <span class="at">{e(j['facility'])}／{e(j['title'])}</span>
         </div>
         <div class="daily">{rows}</div>
-        <p class="tc-foot">続きと給与の内訳は求人ページに。
+        <p class="tc-foot">全{len(tl)}項目と給与の内訳は求人ページに。
           <a href="{D.job_file(j['id'])}">求人を見る →</a></p>
       </div>
     </div>
