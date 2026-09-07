@@ -398,6 +398,8 @@ table{border-collapse:collapse;width:100%;}
 .pill:hover{border-color:var(--accent);color:var(--accent);}
 .pill:has(input:checked){background:var(--accent-tint);border-color:var(--accent);
   color:var(--accent-strong);font-weight:600;}
+.sform-more{margin-top:9px;font-size:0.76rem;}
+.sform-more a{color:var(--accent);font-weight:600;}
 .sform-go{padding:16px;background:var(--surface);border-top:1px solid var(--line);
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .sform-go .hit{font-size:0.82rem;color:var(--ink-soft);}
@@ -665,9 +667,20 @@ table{border-collapse:collapse;width:100%;}
   body{font-size:14.5px;}
   .band{padding:40px 0;}
   .band-head h2{font-size:1.24rem;}
+  .yakinhero{padding-top:30px;}
   .yakinhero h1{font-size:1.52rem;}
-  .yakinpick{grid-template-columns:1fr;transform:translateY(22px);}
-  .yakinhero-tail{height:38px;}
+  .yakinhero .h-sub{margin-top:9px;}
+  .yakinhero .h-meta{margin-top:12px;gap:5px 14px;font-size:0.74rem;}
+  /* 夜勤カードは縦積みの箱ではなく、見出し＋件数を1行に納めた行型にする */
+  .yakinpick{grid-template-columns:1fr;gap:8px;margin-top:20px;transform:translateY(20px);}
+  .ypick{display:grid;grid-template-columns:1fr auto;align-items:baseline;
+    gap:2px 10px;padding:12px 15px 11px;border-top-width:3px;line-height:1.5;}
+  .ypick .yp-head{grid-column:1;grid-row:1;font-size:0.98rem;}
+  .ypick .yp-count{grid-column:2;grid-row:1;font-size:1.18rem;justify-self:end;line-height:1.3;}
+  .ypick .yp-desc{grid-column:1/-1;font-size:0.77rem;line-height:1.55;}
+  .ypick .yp-where{grid-column:1/-1;border-top:0;padding-top:3px;font-size:0.68rem;
+    line-height:1.45;}
+  .yakinhero-tail{height:34px;}
   .coverage{grid-template-columns:1fr;}
   .guidegrid,.shisetsu-grid,.colgrid,.voicegrid,.relgrid,.rankgrid{grid-template-columns:1fr;}
   .bcard{grid-template-columns:1fr;}
@@ -683,7 +696,10 @@ table{border-collapse:collapse;width:100%;}
   .jstory-in{padding:18px;}
   .jstory-photo{aspect-ratio:16/9;}
   .sform-row{grid-template-columns:1fr;}
-  .sform-row>.k{border-right:0;border-bottom:1px solid var(--line);}
+  .sform-row>.k{border-right:0;border-bottom:1px solid var(--line);padding:10px 14px;}
+  .sform-row>.v{padding:10px 14px;}
+  .sform .pill{font-size:0.73rem;padding:5px 9px;gap:5px;}
+  .sform .pillset{gap:5px;}
   .daily-row{grid-template-columns:62px 18px 1fr;}
   .daily-time{font-size:0.78rem;}
   .tilegrid{grid-template-columns:repeat(2,1fr);}
@@ -749,8 +765,28 @@ EXTRA = {
 .voicebox{border-radius:var(--radius-l);padding:26px;}
 .shcard-photo{aspect-ratio:5/4;}
 @media (max-width:860px){
-  .thero-grid{grid-template-columns:1fr;gap:28px;}
+  .thero-grid{grid-template-columns:1fr;gap:24px;}
   .thero-copy h1{font-size:1.5rem;}
+}
+@media (max-width:720px){
+  /* モバイルはヒーローが1画面を超えないよう、写真とタイムラインを詰める */
+  .timelinehero{padding:30px 0 34px;}
+  .thero-copy .h-sub{margin-top:11px;}
+  .thero-copy .h-stat{gap:6px 16px;margin-top:14px;}
+  .thero-copy .h-stat div{font-size:0.75rem;}
+  .thero-copy .h-stat b{display:inline;font-size:1.02rem;margin-right:4px;}
+  .thero-copy .btns{margin-top:16px;gap:9px;}
+  .thero-copy .btns .btn{padding:11px 18px;font-size:0.87rem;}
+  .thero-photo{aspect-ratio:16/9;}
+  .thero-card-body{padding:16px 18px 18px;}
+  .thero-card .tc-top{padding-bottom:10px;}
+  .thero-card .daily-row{grid-template-columns:56px 16px 1fr;}
+  .thero-card .daily-time{padding:8px 10px 8px 0;}
+  .thero-card .daily-body{padding:7px 0 8px 12px;}
+  .thero-card .daily-axis::after{top:12px;}
+  .thero-card .daily-row:first-child .daily-axis::before{top:13px;}
+  .thero-card .daily-row:last-child .daily-axis::before{bottom:calc(100% - 13px);}
+  .thero-card .tc-foot{margin-top:10px;padding-top:10px;}
 }
 """,
     # C：情報を表で詰める。装飾を落とし罫線で構造を出す。

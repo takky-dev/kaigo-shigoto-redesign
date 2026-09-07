@@ -360,7 +360,7 @@ def hero_timeline():
           <span class="at">{e(j['facility'])}／{e(j['title'])}</span>
         </div>
         <div class="daily">{rows}</div>
-        <p class="tc-foot">退勤までの続き、給与の内訳・職員構成・働く人の声も求人ページに掲載しています。
+        <p class="tc-foot">続きと給与の内訳は求人ページに。
           <a href="{D.job_file(j['id'])}">求人を見る →</a></p>
       </div>
     </div>
@@ -382,9 +382,10 @@ def hero_search():
         f'<label class="pill"><input type="checkbox" name="emp" value="{e(a)}">{e(a)}</label>'
         for a in D.EMPLOYMENT_CHIPS
     )
+    # トップの検索はよく使う10条件まで。残りは求人一覧側で絞り込む（モバイルで縦に伸びすぎるため）
     cond = "".join(
         f'<label class="pill"><input type="checkbox" name="cond" value="{e(a)}">{e(a)}</label>'
-        for a in D.CONDITION_CHIPS
+        for a in D.CONDITION_CHIPS[:10]
     )
     return f"""<section class="searchhero">
   <div class="wrap">
@@ -410,7 +411,8 @@ def hero_search():
       <div class="sform-row"><div class="k">雇用形態</div>
         <div class="v"><div class="pillset">{emp}</div></div></div>
       <div class="sform-row"><div class="k">こだわり条件</div>
-        <div class="v"><div class="pillset">{cond}</div></div></div>
+        <div class="v"><div class="pillset">{cond}</div>
+          <p class="sform-more"><a href="list.html">残り{len(D.CONDITION_CHIPS) - 10}件の条件で絞り込む →</a></p></div></div>
       <div class="sform-go">
         <p class="hit">該当求人 <b>{fmt(D.TOTAL_JOBS)}</b>件</p>
         <button class="btn btn-main" type="submit">この条件で検索する</button>
