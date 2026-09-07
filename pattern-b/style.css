@@ -278,8 +278,10 @@ table{border-collapse:collapse;width:100%;}
 .voice-inline .body{font-size:0.86rem;line-height:1.85;margin-top:10px;}
 
 /* ============================================ 求人カード（dense｜パターンA） */
-.jrow{display:grid;grid-template-columns:6px 1fr;background:var(--surface);
+.jrow{display:grid;grid-template-columns:6px 108px 1fr;background:var(--surface);
   border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;}
+.jrow-photo{position:relative;background:var(--bg-alt);min-height:100%;}
+.jrow-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .jrow+.jrow{margin-top:10px;}
 .jrow:hover{box-shadow:var(--shadow-lift);}
 .jrow-stripe{background:var(--line-strong);}
@@ -317,11 +319,14 @@ table{border-collapse:collapse;width:100%;}
 .jrow-foot .detail{font-size:0.8rem;color:var(--accent);}
 
 /* 横スクロールレール内の dense カードは縦積みに切り替える */
-.rail-track .jrow{grid-template-columns:1fr;height:100%;}
+/* 行を固定しないと、カードの高さ揃えで生じた余りがストライプと写真の行に配られる */
+.rail-track .jrow{grid-template-columns:1fr;grid-template-rows:5px auto 1fr;height:100%;}
 .rail-track .jrow .jrow-stripe{height:5px;}
+.rail-track .jrow-photo{aspect-ratio:16/9;min-height:0;}
 .rail-track .jrow-in{display:flex;flex-direction:column;height:100%;}
-.rail-track .jrow-grid{grid-template-columns:repeat(2,1fr);}
-.rail-track .jrow-cell:last-child{border-right:0;}
+.rail-track .jrow-grid{grid-template-columns:1fr;}
+.rail-track .jrow-cell{border-right:0;}
+.rail-track .jrow-cell + .jrow-cell{border-top:1px solid var(--line);}
 .rail-track .jrow-title{font-size:0.96rem;}
 .rail-track .jrow-facility{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;
   -webkit-box-orient:vertical;line-clamp:2;min-height:2.6em;}
@@ -695,10 +700,10 @@ table{border-collapse:collapse;width:100%;}
   body{font-size:14.5px;}
   .band{padding:40px 0;}
   .band-head h2{font-size:1.24rem;}
-  .yakinhero{padding-top:28px;}
-  /* モバイルは写真を出すと3択が画面外に落ちるため、選択肢を優先して非表示にする */
-  .yh-photo{display:none;}
-  .yh-top{gap:0;}
+  .yakinhero{padding-top:26px;}
+  /* 写真を消すと文字だけの画面になるため、モバイルでも帯状で残す */
+  .yh-top{gap:16px;}
+  .yh-photo{aspect-ratio:16/7;}
   .yakinhero h1{font-size:1.56rem;}
   .yakinhero .h-sub{margin-top:9px;}
   .yakinhero .h-meta{margin-top:12px;gap:5px 14px;font-size:0.74rem;}
@@ -715,11 +720,19 @@ table{border-collapse:collapse;width:100%;}
   .coverage{grid-template-columns:1fr;}
   .guidegrid,.shisetsu-grid,.colgrid,.voicegrid,.relgrid,.rankgrid{grid-template-columns:1fr;}
   .bcard{grid-template-columns:1fr;}
+  /* スマホでは6枚ぶんの説明文が縦に積み上がって文字の壁になるため2行で止める */
+  .b-why{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    line-clamp:2;}
+  .b-to{padding:14px 16px 15px;gap:6px;}
   .b-from{padding:13px 16px;flex-direction:row;align-items:baseline;gap:10px;}
   .b-from::after{right:auto;left:22px;top:auto;bottom:-11px;transform:none;
     border-left:11px solid transparent;border-right:11px solid transparent;
     border-top:11px solid var(--bg-alt);border-bottom:0;}
   .rankgrid{gap:0;}
+  /* スマホは横並びにすると本文が潰れるため、写真を上に回して帯にする */
+  .jrow{grid-template-columns:1fr;}
+  .jrow .jrow-stripe{height:5px;}
+  .jrow-photo{aspect-ratio:16/7;min-height:0;}
   .jrow-grid{grid-template-columns:repeat(2,1fr);}
   .jrow-cell:nth-child(2){border-right:0;}
   .jrow-cell:nth-child(1),.jrow-cell:nth-child(2){border-bottom:1px solid var(--line);}

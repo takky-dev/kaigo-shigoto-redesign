@@ -5,6 +5,7 @@
 3種類のマークアップを出し分ける。栄養士版のテンプレートは使っていない。
 """
 import os
+import re
 import html as _html
 from _patterns import PATTERNS
 import _data as D
@@ -48,6 +49,12 @@ def shisetsu_of(j):
 
 def fmt(n):
     return f"{n:,}"
+
+
+def pay_compact(s):
+    """カードの狭いセル用に給与表記を詰める。
+    「月給 21.0万円 〜 25.0万円」→「月給 21.0〜25.0万円」"""
+    return re.sub(r"([\d,.]+)(?:万円|円)\s*〜\s*", r"\1〜", s)
 
 
 # =============================================================== 共通パーツ
@@ -155,13 +162,16 @@ def card_dense(j, compact=False):
     flag_html = "".join(f'<span class="has-flag">{e(t)}</span>' for t in flags)
 
     if compact:
-        cells = [("給与", j["pay_main"], "pay"), ("勤務シフト", j["shift"], "")]
+        cells = [("給与", pay_compact(j["pay_main"]), "pay"), ("勤務シフト", j["shift"], "")]
         cell_html = "".join(
             f'<div class="jrow-cell"><dt>{e(k)}</dt><dd class="{cls}">{e(v)}</dd></div>'
             for k, v, cls in cells
         )
         return f"""<article class="jrow" data-s="s{si}">
   <div class="jrow-stripe" aria-hidden="true"></div>
+  <div class="jrow-photo">
+    <img src="{img(j['photo'])}" alt="{e(shisetsu_of(j)[1])}のイメージ写真" loading="lazy" width="400" height="300">
+  </div>
   <div class="jrow-in">
     <div class="jrow-top">
       <span class="chip-shoku sk{si}">{e(s[2])}</span>
@@ -179,7 +189,7 @@ def card_dense(j, compact=False):
 </article>"""
 
     cells = [
-        ("給与", j["pay_main"], "pay"),
+        ("給与", pay_compact(j["pay_main"]), "pay"),
         ("勤務シフト", j["shift"], ""),
         ("勤務地", j["pref"], ""),
         ("施設種別", shisetsu_of(j)[2], ""),
@@ -191,6 +201,9 @@ def card_dense(j, compact=False):
     tags = "".join(f"<span>{e(t)}</span>" for t in j["tags"][:6])
     return f"""<article class="jrow" data-s="s{si}">
   <div class="jrow-stripe" aria-hidden="true"></div>
+  <div class="jrow-photo">
+    <img src="{img(j['photo'])}" alt="{e(shisetsu_of(j)[1])}のイメージ写真" loading="lazy" width="400" height="300">
+  </div>
   <div class="jrow-in">
     <div class="jrow-top">
       <span class="chip-shoku sk{si}">{e(s[2])}</span>

@@ -16,7 +16,8 @@ PATTERNS = {
         # --- 構成 ---
         "hero": "yakin",
         "card": "dense",
-        "sections": ["yakin", "prevjob", "coverage", "matrix", "rails", "shokushu_guide", "columns", "faq", "cta"],
+        # 求人（rails）を上に置く。求人サイトで実物に届くまで説明が続くのを避けるため。
+        "sections": ["yakin", "rails", "prevjob", "coverage", "matrix", "shokushu_guide", "columns", "faq", "cta"],
         "rails": ["yakin-none", "shikaku", "mikeiken"],
         "voice": False,
         "souba": False,
