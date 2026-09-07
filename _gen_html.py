@@ -322,7 +322,7 @@ def hero_yakin():
         </div>
       </div>
       <div class="yh-photo">
-        <img src="{img('hero-a-yakin.jpg')}" alt="夜勤帯に職員が入居者に付き添っている様子" loading="eager">
+        <img src="{img('hero-a-yakin.jpg')}" alt="夜勤明けの職員が、出勤してきた日勤の職員に申し送りをしている様子" loading="eager">
       </div>
     </div>
     <div class="yakinpick">{''.join(picks)}</div>
