@@ -345,7 +345,7 @@ def hero_yakin():
     for key, headline, desc, count, where in D.YAKIN_AXIS:
         picks.append(f"""<a class="ypick" href="list.html" data-yk="{e(key)}" data-yk-label="{e(headline)}" data-yk-count="{count}">
       <span class="yp-head">{e(headline)}</span>
-      <span class="yp-count">{fmt(count)}<small>件</small></span>
+      <span class="yp-count"><b data-count="{count}">{fmt(count)}</b><small>件</small></span>
       <span class="yp-desc">{e(desc)}</span>
       <span class="yp-where">主な施設：{e(where)}</span>
     </a>""")
@@ -356,9 +356,9 @@ def hero_yakin():
         <h1>夜勤は、自分で選べる。</h1>
         <p class="h-sub">特養・老健・デイ・訪問介護まで。介護の求人を毎日更新。会員登録なしで直接応募できます。</p>
         <div class="h-meta">
-          <span>掲載求人 <b data-count="{D.TOTAL_JOBS}">{fmt(D.TOTAL_JOBS)}</b>件</span>
-          <span>掲載事業所 <b data-count="{D.TOTAL_COMPANIES}">{fmt(D.TOTAL_COMPANIES)}</b>法人</span>
-          <span>本日の新着 <b data-count="{D.TODAY_NEW}">{fmt(D.TODAY_NEW)}</b>件</span>
+          <span>掲載求人 {fmt(D.TOTAL_JOBS)}件</span>
+          <span>掲載事業所 {fmt(D.TOTAL_COMPANIES)}法人</span>
+          <span>本日の新着 {fmt(D.TODAY_NEW)}件</span>
           <span>最終更新 {e(D.UPDATED)}</span>
         </div>
       </div>
@@ -464,7 +464,7 @@ def hero_search():
         <div class="v"><div class="pillset">{cond}</div>
           <p class="sform-more"><a href="list.html">残り{len(D.CONDITION_CHIPS) - 10}件の条件で絞り込む →</a></p></div></div>
       <div class="sform-go">
-        <p class="hit">該当求人 <b>{fmt(D.TOTAL_JOBS)}</b>件</p>
+        <p class="hit">該当求人 <b data-count="{D.TOTAL_JOBS}">{fmt(D.TOTAL_JOBS)}</b>件</p>
         <button class="btn btn-main" type="submit">この条件で検索する</button>
       </div>
     </form>

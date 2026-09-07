@@ -150,7 +150,7 @@ table{border-collapse:collapse;width:100%;}
   border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;}
 .cov{background:var(--surface);padding:18px 18px 16px;}
 .cov-label{font-size:0.82rem;font-weight:700;}
-.cov-bar{height:6px;background:var(--bg-alt);border-radius:99px;margin:10px 0 8px;overflow:hidden;}
+.cov-bar{height:10px;background:var(--bg-alt);border-radius:99px;margin:10px 0 8px;overflow:hidden;}
 .cov-bar i{display:block;height:100%;background:var(--accent);border-radius:99px;}
 .cov-val{font-size:0.76rem;color:var(--ink-soft);}
 .cov-val b{font-family:var(--font-num);color:var(--ink);}

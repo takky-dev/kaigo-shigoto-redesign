@@ -129,17 +129,27 @@
     });
   }
 
-  // 「前回の続きから」の帯を出す
-  function initResume() {
+  /* 覚えた条件の帯。初回訪問でも、その場で条件を選べばすぐ出るようにしている
+     （次に来るまで何も起きないと、機能があること自体が伝わらないため）。 */
+  function renderResume(justPicked) {
     var mount = document.getElementById('resumeMount');
     if (!mount) return;
+    var old = mount.querySelector('.resume');
     var v = loadJSON(K_YAKIN);
-    if (!v || !v.l) return;
+    if (!v || !v.l) { if (old) old.remove(); return; }
+
+    var head = justPicked ? 'この条件を覚えました：' : '前回の続きから：';
+    if (old) {
+      old.querySelector('.resume-t').innerHTML =
+        head + '<b>' + esc(v.l) + '</b>' +
+        (v.c ? ' <span class="resume-c">' + num(v.c) + '件</span>' : '');
+      return;
+    }
     var el = document.createElement('div');
     el.className = 'resume';
     el.innerHTML =
       '<div class="wrap resume-in">' +
-        '<p class="resume-t">前回の続きから：<b>' + esc(v.l) + '</b>' +
+        '<p class="resume-t">' + head + '<b>' + esc(v.l) + '</b>' +
           (v.c ? ' <span class="resume-c">' + num(v.c) + '件</span>' : '') + '</p>' +
         '<a class="resume-go" href="list.html">この条件で見る →</a>' +
         '<button type="button" class="resume-x" aria-label="この記憶を消す">×</button>' +
@@ -248,6 +258,7 @@
           };
           if (key === 'yakin') {
             rememberYakin(v, sel[key].label, sel[key].n);
+            renderResume(true);   // 初回でもその場で帯を出す
           }
         }
         Array.prototype.forEach.call(g.querySelectorAll('button'), function (x) {
@@ -272,7 +283,7 @@
     initCounters();
     initBars();
     initYakinMemory();
-    initResume();
+    renderResume(false);
     initRecent();
     initDiagnosis();
   }
