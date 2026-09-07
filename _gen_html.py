@@ -650,7 +650,8 @@ def sec_prevjob(p):
       <tbody>{rows}</tbody>
     </table></div>"""
     else:
-        cards = "".join(f"""<a class="bcard" href="list.html">
+        def mk(b):
+            return f"""<a class="bcard" href="list.html">
       <span class="b-from">
         <span class="b-label">前職</span>
         <span class="b-name">{e(b['from_'])}</span>
@@ -661,8 +662,16 @@ def sec_prevjob(p):
         <span class="b-why">{e(b['why'])}</span>
         <span class="b-foot">相性のいい職場：{e(b['fit'])}<b>{fmt(b['count'])}件</b></span>
       </span>
-    </a>""" for b in D.PREV_JOBS)
-        inner = f'<div class="bridge">{cards}</div>'
+    </a>"""
+
+        # 6枚すべてを並べると縦に伸びるため、4枚を出して残りは開いたときに見せる
+        shown = "".join(mk(b) for b in D.PREV_JOBS[:4])
+        rest = "".join(mk(b) for b in D.PREV_JOBS[4:])
+        inner = (f'<div class="bridge">{shown}</div>'
+                 f'<details class="more"><summary>'
+                 f'<span class="more-open">ほかの前職も見る（{len(D.PREV_JOBS) - 4}件）</span>'
+                 f'<span class="more-close">閉じる</span></summary>'
+                 f'<div class="bridge">{rest}</div></details>')
     return f"""<section class="band band-surface">
   <div class="wrap">
     <div class="band-head">
@@ -705,15 +714,21 @@ def sec_shokushu_guide(p):
 
 
 def sec_shisetsu(p):
+    # 7種は件数に3倍近い差がある。数字だけでは規模差が伝わらないためバーを添える
+    mxs = max(x[4] for x in D.SHISETSU)
     cards = []
     for k, name, short, photo, cnt, yakin, desc in D.SHISETSU:
+        w = round(cnt / mxs * 100)
         cards.append(f"""<a class="shcard" href="list.html">
       <span class="shcard-photo"><img src="{img(photo)}" alt="{e(name)}のイメージ写真" loading="lazy" width="600" height="450"></span>
       <span class="shcard-in">
         <span class="shcard-name">{e(name)}</span>
         <span class="shcard-yakin">{e(yakin)}</span>
         <span class="shcard-desc">{e(desc)}</span>
-        <span class="shcard-count">掲載求人 <b>{fmt(cnt)}</b>件</span>
+        <span class="shcard-count">
+          <span class="shc-bar"><i style="width:{w}%"></i></span>
+          掲載求人 <b>{fmt(cnt)}</b>件
+        </span>
       </span>
     </a>""")
     return f"""<section class="band band-tint">
@@ -1050,19 +1065,64 @@ def block_req(j):
 </section>"""
 
 
+def _mins(hhmm):
+    h, m = hhmm.split(":")
+    return int(h) * 60 + int(m)
+
+
+def _dur_label(m):
+    h, mi = divmod(m, 60)
+    if h and mi:
+        return f"{h}時間{mi}分"
+    if h:
+        return f"{h}時間"
+    return f"{mi}分"
+
+
 def block_timeline(j):
+    """1日の流れ。時刻の箇条書きだけでは時間の偏りが読み取れないため、
+    先に実時間の幅を持った帯を出し、そのあとに各項目の詳細を並べる。"""
     if not j["has_timeline"]:
         return ""
-    rows = "".join(f"""<div class="daily-row">
-    <div class="daily-time">{e(t)}</div>
+    tl = j["timeline"]
+    start, end = _mins(tl[0][0]), _mins(tl[-1][0])
+    span = max(end - start, 1)
+
+    # 帯：各項目から次の項目までを、実際の所要時間に比例した幅で並べる
+    segs = []
+    for i in range(len(tl) - 1):
+        t, label, _d = tl[i]
+        dur = _mins(tl[i + 1][0]) - _mins(t)
+        w = dur / span * 100
+        kind = " rest" if ("休憩" in label or "昼食" in label) else ""
+        segs.append(
+            f'<span class="tb-seg{kind}" style="width:{w:.2f}%" '
+            f'title="{e(t)}〜{e(tl[i + 1][0])}　{e(label)}（{_dur_label(dur)}）">'
+            f'<span class="tb-in">{e(label)}</span></span>'
+        )
+
+    rows = []
+    for i, (t, l, d) in enumerate(tl):
+        dur = ""
+        if i < len(tl) - 1:
+            dur = f'<span class="daily-dur">{_dur_label(_mins(tl[i + 1][0]) - _mins(t))}</span>'
+        rows.append(f"""<div class="daily-row">
+    <div class="daily-time">{e(t)}{dur}</div>
     <div class="daily-axis" aria-hidden="true"></div>
     <div class="daily-body"><p class="daily-label">{e(l)}</p>
       {f'<p class="daily-desc">{e(d)}</p>' if d else ''}</div>
-  </div>""" for t, l, d in j["timeline"])
+  </div>""")
+
     return f"""<section class="jobsec">
   <h2>1日の流れ</h2>
   <p class="daily-cap">{e(j['timeline_label'])}</p>
-  <div class="daily">{rows}</div>
+  <div class="timeband">
+    <div class="tb-bar">{''.join(segs)}</div>
+    <div class="tb-ends"><span>{e(tl[0][0])} {e(tl[0][1])}</span>
+      <span>{e(tl[-1][0])} {e(tl[-1][1])}</span></div>
+    <p class="tb-note">出勤から退勤まで {_dur_label(span)}。帯の幅が各業務にかかる時間です。</p>
+  </div>
+  <div class="daily">{''.join(rows)}</div>
 </section>"""
 
 

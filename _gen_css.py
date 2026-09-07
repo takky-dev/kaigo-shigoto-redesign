@@ -261,6 +261,28 @@ table{border-collapse:collapse;width:100%;}
 .daily-cap{display:inline-flex;align-items:center;gap:8px;font-size:0.76rem;
   background:var(--accent-tint);color:var(--accent-strong);padding:5px 12px;border-radius:99px;
   margin-bottom:16px;font-weight:700;}
+.daily-dur{display:block;font-size:0.68rem;font-weight:400;color:var(--ink-faint);
+  margin-top:2px;}
+
+/* 実時間の幅を持った帯。どこに時間がかかるかを読まずに掴めるようにする */
+.timeband{margin-bottom:20px;}
+.tb-bar{display:flex;height:38px;border-radius:var(--radius-s);overflow:hidden;
+  border:1px solid var(--line);}
+.tb-seg{position:relative;min-width:0;background:var(--accent-tint);
+  border-right:1px solid var(--surface);display:flex;align-items:center;
+  justify-content:center;overflow:hidden;}
+.tb-seg:last-child{border-right:0;}
+.tb-seg.rest{background:var(--warm-tint);}
+.tb-in{font-size:0.68rem;color:var(--accent-strong);white-space:nowrap;
+  padding:0 6px;overflow:hidden;text-overflow:ellipsis;}
+.tb-seg.rest .tb-in{color:var(--warm-strong);font-weight:700;}
+.tb-ends{display:flex;justify-content:space-between;margin-top:6px;
+  font-size:0.72rem;color:var(--ink-soft);gap:12px;}
+.tb-note{margin-top:6px;font-size:0.74rem;color:var(--ink-faint);line-height:1.7;}
+@media (max-width:720px){
+  .tb-bar{height:30px;}
+  .tb-in{font-size:0.6rem;padding:0 3px;}
+}
 
 /* ============================================================= 働く人の声 */
 .voicegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
@@ -530,6 +552,10 @@ table{border-collapse:collapse;width:100%;}
 .shcard-desc{font-size:0.78rem;color:var(--ink-soft);line-height:1.65;}
 .shcard-count{margin-top:auto;padding-top:9px;border-top:1px dashed var(--line);
   font-size:0.78rem;color:var(--ink-soft);}
+/* 施設種別ごとの掲載規模を、数字だけでなくバーでも示す */
+.shc-bar{display:block;height:6px;background:var(--bg-alt);border-radius:99px;
+  overflow:hidden;margin-bottom:6px;}
+.shc-bar i{display:block;height:100%;background:var(--accent);border-radius:99px;}
 .shcard-count b{font-family:var(--font-num);color:var(--warm-strong);font-size:1rem;}
 
 /* ================================================================= エリア */
