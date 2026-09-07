@@ -196,6 +196,21 @@ table{border-collapse:collapse;width:100%;}
 .matrix tfoot td,.matrix tfoot th{background:var(--bg-alt);font-weight:700;font-family:var(--font-num);}
 .matrix th:last-child,.matrix td:last-child{border-right:0;}
 .matrix-note{font-size:0.75rem;color:var(--ink-faint);margin-top:10px;line-height:1.7;}
+/* ヒートマップの凡例。濃淡が何を意味するかを示す */
+.matrix-legend{display:flex;align-items:center;gap:5px;margin-top:12px;
+  font-size:0.72rem;color:var(--ink-faint);}
+.matrix-legend .lg{display:block;width:26px;height:12px;border:1px solid var(--line);}
+/* 合計列はヒートマップの対象外（尺度が違う）ので、地色を変えて切り分ける */
+.matrix td.num{background:var(--bg-alt);}
+.matrix td a{font-weight:600;}
+
+/* 職種ごとの平均月給を横並びで比べるバー */
+.guide-pay{display:flex;align-items:center;gap:9px;}
+.guide-pay .gp-bar{flex:1;height:8px;background:var(--bg-alt);border-radius:99px;
+  overflow:hidden;min-width:0;}
+.guide-pay .gp-bar i{display:block;height:100%;background:var(--accent);border-radius:99px;}
+.guide-pay b{font-family:var(--font-num);font-size:0.92rem;white-space:nowrap;
+  color:var(--accent-strong);}
 
 /* ============================================================ 求人レール（横） */
 .rail+.rail{margin-top:44px;}

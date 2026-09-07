@@ -499,7 +499,16 @@ def sec_coverage(p):
 </section>"""
 
 
+def _rgb(hexcode):
+    h = hexcode.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
 def sec_matrix(p):
+    # 42マスの数字を1つずつ読ませるのではなく、濃淡で分布が一目で分かるようにする。
+    # 件数の分布が偏っているため、平方根寄りの階調にして小さい値も見えるようにした。
+    r, g, b = _rgb(p["tokens"]["--accent"])
+    mx = max(v for row in D.MATRIX.values() for v in row.values())
     head_cells = "".join(f'<th scope="col">{e(s[2])}</th>' for s in D.SHISETSU)
     body = []
     for k, name, short, _c, cnt, _pay, _desc in D.SHOKUSHU:
@@ -510,18 +519,28 @@ def sec_matrix(p):
             if v == 0:
                 tds.append('<td class="zero">—</td>')
             else:
-                tds.append(f'<td><a href="list.html">{fmt(v)}</a></td>')
+                a = 0.05 + 0.40 * (v / mx) ** 0.6
+                tds.append(
+                    f'<td style="background:rgba({r},{g},{b},{a:.3f})">'
+                    f'<a href="list.html">{fmt(v)}</a></td>'
+                )
         body.append(
             f'<tr><th scope="row"><span class="dot sk{si}"></span>{e(short)}</th>'
             f'{"".join(tds)}<td class="num"><b>{fmt(cnt)}</b></td></tr>'
         )
     foot_tds = "".join(f"<td>{fmt(s[4])}</td>" for s in D.SHISETSU)
+    # 凡例はセルとまったく同じ式で色を出し、見本と実物がずれないようにする
+    legend = "".join(
+        f'<i class="lg" style="background:rgba({r},{g},{b},'
+        f'{0.05 + 0.40 * t ** 0.6:.3f})"></i>'
+        for t in (0.04, 0.2, 0.45, 0.72, 1.0)
+    )
     return f"""<section class="band">
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">職種 × 施設種別</span>
       <h2>同じ介護職でも、施設が変われば別の仕事</h2>
-      <p class="lede">組み合わせごとの件数です。数字からそのまま求人一覧に進めます。</p>
+      <p class="lede">色が濃いほど求人が多い組み合わせです。数字からそのまま求人一覧に進めます。</p>
     </div>
     <div class="matrixwrap"><table class="matrix">
       <caption class="sr-only">職種と施設種別の組み合わせごとの求人件数</caption>
@@ -529,6 +548,7 @@ def sec_matrix(p):
       <tbody>{''.join(body)}</tbody>
       <tfoot><tr><th scope="row">合計</th>{foot_tds}<td>{fmt(D.TOTAL_JOBS)}</td></tr></tfoot>
     </table></div>
+    <p class="matrix-legend"><span>少ない</span>{legend}<span>多い</span></p>
     <p class="matrix-note">件数は{e(D.UPDATED)}時点のものです。数値はデモ用のサンプルです。</p>
   </div>
 </section>"""
@@ -650,11 +670,20 @@ def sec_prevjob(p):
 
 
 def sec_shokushu_guide(p):
+    # 平均月給は6職種を見比べる数字なので、テキストで並べずバーで比較できるようにする。
+    # 目盛は0起点（途中から始めると差が実際より大きく見えるため）。
+    SCALE = 35.0
     cards = []
     for k, name, short, _c, cnt, pay, desc in D.SHOKUSHU:
+        val = float(pay.replace("万円", ""))
+        w = round(val / SCALE * 100)
         cards.append(f"""<a class="guide" data-s="{e(k)}" href="list.html">
       <span class="guide-name">{e(name)}</span>
-      <span class="guide-stats"><span>求人 <b>{fmt(cnt)}</b>件</span><span>平均月給 <b>{e(pay)}</b></span></span>
+      <span class="guide-pay">
+        <span class="gp-bar"><i style="width:{w}%"></i></span>
+        <b>{e(pay)}</b>
+      </span>
+      <span class="guide-stats"><span>求人 <b>{fmt(cnt)}</b>件</span></span>
       <span class="guide-desc">{e(desc)}</span>
     </a>""")
     return f"""<section class="band">
@@ -662,7 +691,7 @@ def sec_shokushu_guide(p):
     <div class="band-head">
       <span class="eyebrow">職種から探す</span>
       <h2>今の資格で、どこまで狙えるか</h2>
-      <p class="lede">必要な資格と平均月給を並べました。数値はデモ用サンプルです。</p>
+      <p class="lede">バーの長さが平均月給です（0〜35万円で表示）。数値はデモ用サンプルです。</p>
     </div>
     <div class="guidegrid">{''.join(cards)}</div>
   </div>
