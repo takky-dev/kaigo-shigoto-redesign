@@ -23,9 +23,13 @@ def tokens_block(p):
 
 BASE = r"""
 *,*::before,*::after{box-sizing:border-box;}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:hidden;}
+/* iOSでは html と body の両方に overflow-x:hidden を掛けると、クリップされても
+   ページはパン可能なまま残り、body の背景が届かない右側が空白に見える。
+   clip はスクロールコンテナを作らないため、この症状が起きない。 */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;
+  overflow-x:hidden;overflow-x:clip;background:var(--bg);}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
-  font-size:15px;line-height:1.75;font-feature-settings:"palt" 1;overflow-x:hidden;}
+  font-size:15px;line-height:1.75;font-feature-settings:"palt" 1;}
 img{max-width:100%;display:block;}
 a{color:inherit;}
 button{font:inherit;cursor:pointer;}
