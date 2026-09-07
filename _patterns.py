@@ -18,7 +18,10 @@ PATTERNS = {
         "card": "dense",
         # 求人（rails）を上に置く。求人サイトで実物に届くまで説明が続くのを避けるため。
         "sections": ["yakin", "rails", "shindan", "prevjob", "coverage", "matrix", "shokushu_guide", "columns", "faq", "cta"],
-        "rails": ["yakin-none", "shikaku", "mikeiken"],
+        # 売りである「掲載情報の充実度」は、パネルで主張するのではなく
+        # 実物の求人レールで見せる（ジョブメドレーが取っている方法）。
+        # 未経験は直下の prevjob、資格は shokushu_guide が担うため重複を外した。
+        "rails": ["yakin-none", "timeline", "voice"],
         "voice": False,
         "souba": False,
         "job_hero": "spec",       # 求人詳細の冒頭：スペック要約カード
