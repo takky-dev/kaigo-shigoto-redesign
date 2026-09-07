@@ -29,15 +29,21 @@ SHOKU_IDX = {k: i + 1 for i, (k, *_rest) in enumerate(D.SHOKUSHU)}
 CSS_VER = ""
 
 
+JS_VER = ""
+
+
+def _hash(path):
+    if not os.path.exists(path):
+        return ""
+    with open(path, "rb") as f:
+        return hashlib.sha1(f.read()).hexdigest()[:8]
+
+
 def set_css_ver(pattern_key):
-    """そのパターンの style.css の内容ハッシュを CSS_VER に設定する。"""
-    global CSS_VER
-    path = os.path.join(ROOT, pattern_key, "style.css")
-    if os.path.exists(path):
-        with open(path, "rb") as f:
-            CSS_VER = hashlib.sha1(f.read()).hexdigest()[:8]
-    else:
-        CSS_VER = ""
+    """そのパターンの style.css と共通 app.js の内容ハッシュを設定する。"""
+    global CSS_VER, JS_VER
+    CSS_VER = _hash(os.path.join(ROOT, pattern_key, "style.css"))
+    JS_VER = _hash(os.path.join(ROOT, "assets", "app.js"))
 
 
 def e(s):
@@ -74,7 +80,7 @@ def pay_compact(s):
 
 
 # =============================================================== 共通パーツ
-def head(p, key, title, desc, page):
+def head(p, key, title, desc, page, body_attr=""):
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -85,7 +91,7 @@ def head(p, key, title, desc, page):
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="style.css{('?v=' + CSS_VER) if CSS_VER else ''}">
 </head>
-<body data-page="{e(page)}">
+<body data-page="{e(page)}"{body_attr}>
 """
 
 
@@ -162,7 +168,8 @@ def mobilebar(primary_href="list.html", primary_label="求人を探す"):
 
 
 def tail():
-    return "</body>\n</html>\n"
+    src = "../assets/app.js" + (("?v=" + JS_VER) if JS_VER else "")
+    return f'<script src="{src}" defer></script>\n</body>\n</html>\n'
 
 
 # ============================================================ 求人カード3種
@@ -336,7 +343,7 @@ def render_cards(p, jobs):
 def hero_yakin():
     picks = []
     for key, headline, desc, count, where in D.YAKIN_AXIS:
-        picks.append(f"""<a class="ypick" href="list.html">
+        picks.append(f"""<a class="ypick" href="list.html" data-yk="{e(key)}" data-yk-label="{e(headline)}" data-yk-count="{count}">
       <span class="yp-head">{e(headline)}</span>
       <span class="yp-count">{fmt(count)}<small>件</small></span>
       <span class="yp-desc">{e(desc)}</span>
@@ -349,9 +356,9 @@ def hero_yakin():
         <h1>夜勤は、自分で選べる。</h1>
         <p class="h-sub">特養・老健・デイ・訪問介護まで。介護の求人を毎日更新。会員登録なしで直接応募できます。</p>
         <div class="h-meta">
-          <span>掲載求人 {fmt(D.TOTAL_JOBS)}件</span>
-          <span>掲載事業所 {fmt(D.TOTAL_COMPANIES)}法人</span>
-          <span>本日の新着 {fmt(D.TODAY_NEW)}件</span>
+          <span>掲載求人 <b data-count="{D.TOTAL_JOBS}">{fmt(D.TOTAL_JOBS)}</b>件</span>
+          <span>掲載事業所 <b data-count="{D.TOTAL_COMPANIES}">{fmt(D.TOTAL_COMPANIES)}</b>法人</span>
+          <span>本日の新着 <b data-count="{D.TODAY_NEW}">{fmt(D.TODAY_NEW)}</b>件</span>
           <span>最終更新 {e(D.UPDATED)}</span>
         </div>
       </div>
@@ -384,9 +391,9 @@ def hero_timeline():
       <h1>働く前に、1日が見える。</h1>
       <p class="h-sub">出勤から退勤までの時間割を、掲載施設に書いてもらいました。読んでから決めてください。</p>
       <div class="h-stat">
-        <div><b>{fmt(D.TOTAL_JOBS)}</b>掲載求人</div>
-        <div><b>{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</div>
-        <div><b>{fmt(D.TODAY_NEW)}</b>本日の新着</div>
+        <div><b data-count="{D.TOTAL_JOBS}">{fmt(D.TOTAL_JOBS)}</b>掲載求人</div>
+        <div><b data-count="{D.TOTAL_COMPANIES}">{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</div>
+        <div><b data-count="{D.TODAY_NEW}">{fmt(D.TODAY_NEW)}</b>本日の新着</div>
       </div>
       <div class="btns">
         <a class="btn btn-main" href="list.html">求人を探す</a>
@@ -435,9 +442,9 @@ def hero_search():
     <h1>条件は、並べて比べる。</h1>
     <p class="h-sub">基本給・手当・賞与を分けて掲載。25の条件で絞り込めます。会員登録は不要です。</p>
     <div class="h-stat">
-      <span><b>{fmt(D.TOTAL_JOBS)}</b>掲載求人</span>
-      <span><b>{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</span>
-      <span><b>{fmt(D.TODAY_NEW)}</b>本日の新着</span>
+      <span><b data-count="{D.TOTAL_JOBS}">{fmt(D.TOTAL_JOBS)}</b>掲載求人</span>
+      <span><b data-count="{D.TOTAL_COMPANIES}">{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</span>
+      <span><b data-count="{D.TODAY_NEW}">{fmt(D.TODAY_NEW)}</b>本日の新着</span>
       <span>最終更新 {e(D.UPDATED)}</span>
     </div>
     <div class="searchhero-photo">
@@ -477,7 +484,7 @@ def sec_coverage(p):
         pct = round(got / total * 100)
         cells.append(f"""<div class="cov">
       <p class="cov-label">{e(label)}</p>
-      <div class="cov-bar"><i style="width:{pct}%"></i></div>
+      <div class="cov-bar"><i data-w="{pct}" style="width:{pct}%"></i></div>
       <p class="cov-val"><b>{got}</b> / {total}件の求人に掲載（{pct}%）</p>
       <p class="cov-note">{e(note)}</p>
     </div>""")
@@ -550,6 +557,54 @@ def sec_rails(p):
       <p class="lede">応募前に確かめたくなる条件ごとに、求人をまとめました。</p>
     </div>
     {''.join(blocks)}
+  </div>
+</section>"""
+
+
+def sec_shindan(p):
+    """3つの質問で件数が動く絞り込み。選んだ夜勤条件はブラウザに記憶される。"""
+    yakin = "".join(
+        f'<button type="button" data-v="{e(k)}" data-n="{cnt}" data-label="{e(head)}" '
+        f'aria-pressed="false">{e(head)}</button>'
+        for k, head, _d, cnt, _w in D.YAKIN_AXIS
+    )
+    shoku = "".join(
+        f'<button type="button" data-v="{e(k)}" data-r="{cnt / D.TOTAL_JOBS:.4f}" '
+        f'data-label="{e(short)}" aria-pressed="false">{e(short)}</button>'
+        for k, _n, short, _c, cnt, _p, _d in D.SHOKUSHU
+    )
+    area_counts = [842, 586, 548, 452, 418, 396, 364, 312, 298, 186]
+    area = "".join(
+        f'<button type="button" data-v="a{i}" data-r="{c / D.TOTAL_JOBS:.4f}" '
+        f'data-label="{e(a)}" aria-pressed="false">{e(a)}</button>'
+        for i, (a, c) in enumerate(zip(D.AREA_CHIPS, area_counts))
+    )
+    return f"""<section class="band band-surface" id="shindan">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">3つの質問</span>
+      <h2>あなたの条件だと、何件あるか</h2>
+      <p class="lede">選ぶたびに件数が変わります。会員登録は不要です。</p>
+    </div>
+    <div class="dx">
+      <div class="dx-q">
+        <p class="dx-label">1. 夜勤はどうしますか</p>
+        <div class="dx-opts" data-g="yakin">{yakin}</div>
+      </div>
+      <div class="dx-q">
+        <p class="dx-label">2. 職種は</p>
+        <div class="dx-opts" data-g="shoku">{shoku}</div>
+      </div>
+      <div class="dx-q">
+        <p class="dx-label">3. エリアは</p>
+        <div class="dx-opts" data-g="area">{area}</div>
+      </div>
+      <div class="dx-out">
+        <p class="dx-res"><span class="dx-n" data-base="{D.TOTAL_JOBS}">{fmt(D.TOTAL_JOBS)}</span><span class="dx-l">件（3つ選ぶと、あなたに合う求人の数になります）</span></p>
+        <a class="btn btn-main dx-go" href="list.html" hidden>この条件の求人を見る</a>
+      </div>
+    </div>
+    <p class="matrix-note">選んだ夜勤の条件はご利用中のブラウザに保存され、次にお越しいただいたときに引き継がれます。当サイトのサーバーには送信されません。</p>
   </div>
 </section>"""
 
@@ -818,6 +873,7 @@ SECTION_FN = {
     "yakin": lambda p: "",  # ヒーローで出力済み
     "coverage": sec_coverage,
     "prevjob": sec_prevjob,
+    "shindan": sec_shindan,
     "matrix": sec_matrix,
     "rails": sec_rails,
     "shokushu_guide": sec_shokushu_guide,
@@ -844,7 +900,8 @@ def page_index(p):
              f"{D.TAGLINE}。{D.TOTAL_JOBS:,}件の求人を、夜勤の有無・職種・施設種別・こだわり条件から探せます。会員登録不要で直接応募できます。",
              "index")
         + masthead("")
-        + "<main>" + "".join(body) + "</main>"
+        + '<div id="resumeMount"></div>'
+        + "<main>" + "".join(body) + '<div id="recentMount"></div>' + "</main>"
         + footer() + mobilebar() + tail()
     )
 
@@ -1086,7 +1143,9 @@ def page_job(p, j):
     return (
         head(p, "job", f"{j['title']}／{j['facility']}",
              f"{j['facility']}の{j['title']}（{j['employment']}）の求人。{j['pay_main']}、{j['shift']}、{j['area']}。会員登録不要で直接応募できます。",
-             "job")
+             "job",
+             f' data-job-title="{e(j["title"])}" data-job-facility="{e(j["facility"])}"'
+             f' data-job-url="{D.job_file(j["id"])}"')
         + masthead("list.html")
         + crumbs([("トップ", "index.html"), ("求人一覧", "list.html"), (j["facility"], None)])
         + f"""<main><div class="wrap jobwrap">

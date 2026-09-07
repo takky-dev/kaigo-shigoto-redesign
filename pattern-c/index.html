@@ -6,7 +6,7 @@
 <title>かいごしごと｜介護施設で働く人のための求人サイト｜kaigo.</title>
 <meta name="description" content="介護施設で働く人のための求人サイト。6,524件の求人を、夜勤の有無・職種・施設種別・こだわり条件から探せます。会員登録不要で直接応募できます。">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="style.css?v=6ce1b778">
+<link rel="stylesheet" href="style.css?v=4b718766">
 </head>
 <body data-page="index">
 <header class="masthead">
@@ -21,14 +21,14 @@
   <nav class="mastnav" aria-label="サイト内メニュー"><ul><li><a href="list.html">求人を探す</a></li><li><a href="column.html">お仕事コラム</a></li><li><a href="faq.html">よくある質問</a></li><li><a href="about.html">サイトについて</a></li><li><a href="contact-company.html">掲載のご相談</a></li></ul></nav>
 </div>
 </header>
-<main><section class="searchhero">
+<div id="resumeMount"></div><main><section class="searchhero">
   <div class="wrap">
     <h1>条件は、並べて比べる。</h1>
     <p class="h-sub">基本給・手当・賞与を分けて掲載。25の条件で絞り込めます。会員登録は不要です。</p>
     <div class="h-stat">
-      <span><b>6,524</b>掲載求人</span>
-      <span><b>890</b>掲載法人</span>
-      <span><b>156</b>本日の新着</span>
+      <span><b data-count="6524">6,524</b>掲載求人</span>
+      <span><b data-count="890">890</b>掲載法人</span>
+      <span><b data-count="156">156</b>本日の新着</span>
       <span>最終更新 2026年9月7日</span>
     </div>
     <div class="searchhero-photo">
@@ -109,6 +109,33 @@
       <span class="rank-name">資格取得支援あり</span>
       <span class="rank-count">512件</span>
     </a></div>
+  </div>
+</section><section class="band band-surface" id="shindan">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">3つの質問</span>
+      <h2>あなたの条件だと、何件あるか</h2>
+      <p class="lede">選ぶたびに件数が変わります。会員登録は不要です。</p>
+    </div>
+    <div class="dx">
+      <div class="dx-q">
+        <p class="dx-label">1. 夜勤はどうしますか</p>
+        <div class="dx-opts" data-g="yakin"><button type="button" data-v="none" data-n="2148" data-label="夜勤なしで働く" aria-pressed="false">夜勤なしで働く</button><button type="button" data-v="some" data-n="3892" data-label="夜勤ありで働く" aria-pressed="false">夜勤ありで働く</button><button type="button" data-v="senju" data-n="484" data-label="夜勤専従で働く" aria-pressed="false">夜勤専従で働く</button></div>
+      </div>
+      <div class="dx-q">
+        <p class="dx-label">2. 職種は</p>
+        <div class="dx-opts" data-g="shoku"><button type="button" data-v="kaigo" data-r="0.4884" data-label="介護職" aria-pressed="false">介護職</button><button type="button" data-v="soudan" data-r="0.0785" data-label="相談員" aria-pressed="false">相談員</button><button type="button" data-v="caremane" data-r="0.0671" data-label="ケアマネ" aria-pressed="false">ケアマネ</button><button type="button" data-v="sabikan" data-r="0.0561" data-label="サビ責" aria-pressed="false">サビ責</button><button type="button" data-v="kanri" data-r="0.0303" data-label="管理者" aria-pressed="false">管理者</button><button type="button" data-v="kango" data-r="0.2796" data-label="看護師" aria-pressed="false">看護師</button></div>
+      </div>
+      <div class="dx-q">
+        <p class="dx-label">3. エリアは</p>
+        <div class="dx-opts" data-g="area"><button type="button" data-v="a0" data-r="0.1291" data-label="東京都" aria-pressed="false">東京都</button><button type="button" data-v="a1" data-r="0.0898" data-label="神奈川県" aria-pressed="false">神奈川県</button><button type="button" data-v="a2" data-r="0.0840" data-label="大阪府" aria-pressed="false">大阪府</button><button type="button" data-v="a3" data-r="0.0693" data-label="埼玉県" aria-pressed="false">埼玉県</button><button type="button" data-v="a4" data-r="0.0641" data-label="千葉県" aria-pressed="false">千葉県</button><button type="button" data-v="a5" data-r="0.0607" data-label="愛知県" aria-pressed="false">愛知県</button><button type="button" data-v="a6" data-r="0.0558" data-label="福岡県" aria-pressed="false">福岡県</button><button type="button" data-v="a7" data-r="0.0478" data-label="北海道" aria-pressed="false">北海道</button><button type="button" data-v="a8" data-r="0.0457" data-label="兵庫県" aria-pressed="false">兵庫県</button><button type="button" data-v="a9" data-r="0.0285" data-label="京都府" aria-pressed="false">京都府</button></div>
+      </div>
+      <div class="dx-out">
+        <p class="dx-res"><span class="dx-n" data-base="6524">6,524</span><span class="dx-l">件（3つ選ぶと、あなたに合う求人の数になります）</span></p>
+        <a class="btn btn-main dx-go" href="list.html" hidden>この条件の求人を見る</a>
+      </div>
+    </div>
+    <p class="matrix-note">選んだ夜勤の条件はご利用中のブラウザに保存され、次にお越しいただいたときに引き継がれます。当サイトのサーバーには送信されません。</p>
   </div>
 </section><section class="band">
   <div class="wrap">
@@ -404,32 +431,32 @@
     </div>
     <div class="coverage"><div class="cov">
       <p class="cov-label">勤務シフト・夜勤回数</p>
-      <div class="cov-bar"><i style="width:100%"></i></div>
+      <div class="cov-bar"><i data-w="100" style="width:100%"></i></div>
       <p class="cov-val"><b>8</b> / 8件の求人に掲載（100%）</p>
       <p class="cov-note">月あたりの夜勤回数まで記載</p>
     </div><div class="cov">
       <p class="cov-label">給与の内訳</p>
-      <div class="cov-bar"><i style="width:100%"></i></div>
+      <div class="cov-bar"><i data-w="100" style="width:100%"></i></div>
       <p class="cov-val"><b>8</b> / 8件の求人に掲載（100%）</p>
       <p class="cov-note">基本給・手当・賞与を分けて記載</p>
     </div><div class="cov">
       <p class="cov-label">1日の流れ</p>
-      <div class="cov-bar"><i style="width:62%"></i></div>
+      <div class="cov-bar"><i data-w="62" style="width:62%"></i></div>
       <p class="cov-val"><b>5</b> / 8件の求人に掲載（62%）</p>
       <p class="cov-note">出勤から退勤までの時間割</p>
     </div><div class="cov">
       <p class="cov-label">働く人の声</p>
-      <div class="cov-bar"><i style="width:75%"></i></div>
+      <div class="cov-bar"><i data-w="75" style="width:75%"></i></div>
       <p class="cov-val"><b>6</b> / 8件の求人に掲載（75%）</p>
       <p class="cov-note">在職中の職員のコメント</p>
     </div><div class="cov">
       <p class="cov-label">職員構成</p>
-      <div class="cov-bar"><i style="width:100%"></i></div>
+      <div class="cov-bar"><i data-w="100" style="width:100%"></i></div>
       <p class="cov-val"><b>8</b> / 8件の求人に掲載（100%）</p>
       <p class="cov-note">職種ごとの人数・平均年齢</p>
     </div><div class="cov">
       <p class="cov-label">選考プロセス</p>
-      <div class="cov-bar"><i style="width:100%"></i></div>
+      <div class="cov-bar"><i data-w="100" style="width:100%"></i></div>
       <p class="cov-val"><b>8</b> / 8件の求人に掲載（100%）</p>
       <p class="cov-note">応募から入職までの流れ</p>
     </div></div>
@@ -473,7 +500,7 @@
       <a class="btn btn-ghost" href="faq.html">応募の流れを見る</a>
     </div>
   </div>
-</section></main><footer class="foot">
+</section><div id="recentMount"></div></main><footer class="foot">
 <div class="wrap">
   <div class="foot-cols">
     <div class="foot-brand">
@@ -501,5 +528,6 @@
   <a class="btn btn-ghost" href="faq.html">よくある質問</a>
   <a class="btn btn-main" href="list.html">求人を探す</a>
 </div>
+<script src="../assets/app.js?v=c145547f" defer></script>
 </body>
 </html>

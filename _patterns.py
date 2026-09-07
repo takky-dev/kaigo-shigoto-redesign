@@ -17,7 +17,7 @@ PATTERNS = {
         "hero": "yakin",
         "card": "dense",
         # 求人（rails）を上に置く。求人サイトで実物に届くまで説明が続くのを避けるため。
-        "sections": ["yakin", "rails", "prevjob", "coverage", "matrix", "shokushu_guide", "columns", "faq", "cta"],
+        "sections": ["yakin", "rails", "prevjob", "coverage", "matrix", "shindan", "shokushu_guide", "columns", "faq", "cta"],
         "rails": ["yakin-none", "shikaku", "mikeiken"],
         "voice": False,
         "souba": False,
@@ -69,7 +69,7 @@ PATTERNS = {
         # --- 構成 ---
         "hero": "timeline",
         "card": "story",
-        "sections": ["voices", "story_jobs", "shisetsu", "coverage", "columns", "faq", "cta"],
+        "sections": ["voices", "shindan", "story_jobs", "shisetsu", "coverage", "columns", "faq", "cta"],
         "rails": [],
         "voice": True,
         "souba": False,
@@ -120,7 +120,7 @@ PATTERNS = {
         # --- 構成 ---
         "hero": "search",
         "card": "table",
-        "sections": ["popular", "souba", "prevjob", "table_jobs", "matrix", "area", "coverage", "columns", "faq", "cta"],
+        "sections": ["popular", "shindan", "souba", "prevjob", "table_jobs", "matrix", "area", "coverage", "columns", "faq", "cta"],
         "rails": [],
         "voice": True,
         "souba": True,

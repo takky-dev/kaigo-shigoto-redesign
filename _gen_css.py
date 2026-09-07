@@ -508,6 +508,53 @@ table{border-collapse:collapse;width:100%;}
   border-left:4px solid var(--accent);}
 .faqcat.first{margin-top:0;}
 
+/* ============================================== 3つの質問で絞り込む（診断） */
+.dx{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);
+  padding:22px 24px 24px;}
+.dx-q + .dx-q{margin-top:16px;}
+.dx-label{font-size:0.83rem;font-weight:700;margin-bottom:9px;}
+.dx-opts{display:flex;flex-wrap:wrap;gap:7px;}
+.dx-opts button{padding:8px 15px;border:1px solid var(--line-strong);background:var(--surface);
+  border-radius:99px;font:inherit;font-size:0.81rem;color:var(--ink-soft);cursor:pointer;
+  transition:.14s;}
+.dx-opts button:hover{border-color:var(--accent);color:var(--accent);}
+.dx-opts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);
+  color:var(--accent-ink);font-weight:700;}
+.dx-out{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px;}
+.dx-res{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.dx-n{font-family:var(--font-num);font-size:2rem;font-weight:700;color:var(--warm-strong);
+  font-variant-numeric:tabular-nums;line-height:1.2;}
+.dx-l{font-size:0.84rem;color:var(--ink-soft);}
+.dx-go{margin-left:auto;}
+
+/* ================================================= 前回の続きから（帯） */
+.resume{background:var(--accent-tint);border-bottom:1px solid var(--line);}
+.resume-in{display:flex;align-items:center;gap:14px;padding:11px 20px;flex-wrap:wrap;}
+.resume-t{font-size:0.84rem;color:var(--accent-strong);}
+.resume-t b{font-weight:700;}
+.resume-c{font-family:var(--font-num);color:var(--warm-strong);font-weight:700;}
+.resume-go{font-size:0.82rem;font-weight:700;color:var(--accent);text-decoration:none;
+  white-space:nowrap;}
+.resume-go:hover{text-decoration:underline;}
+.resume-x{margin-left:auto;border:0;background:transparent;color:var(--ink-faint);
+  font-size:1.1rem;line-height:1;padding:4px 6px;cursor:pointer;}
+.resume-x:hover{color:var(--ink);}
+
+/* ==================================================== 最近見た求人 */
+.recent-band{background:var(--bg-alt);}
+.recent-head{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;}
+.recent-head h2{font-size:1.05rem;}
+.recent-x{margin-left:auto;border:0;background:transparent;color:var(--ink-faint);
+  font-size:0.78rem;cursor:pointer;text-decoration:underline;padding:0;}
+.recent-x:hover{color:var(--ink);}
+.recent-list{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.recent-list a{display:block;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius-m);padding:13px 15px;text-decoration:none;color:var(--ink);}
+.recent-list a:hover{border-color:var(--accent);}
+.rc-t{display:block;font-size:0.86rem;font-weight:700;line-height:1.45;}
+.rc-f{display:block;font-size:0.74rem;color:var(--ink-soft);margin-top:3px;}
+
 /* =================================================================== CTA帯 */
 .ctaband{background:var(--accent);color:var(--accent-ink);padding:46px 0;text-align:center;}
 .ctaband h2{font-size:1.42rem;color:#fff;}
@@ -689,6 +736,7 @@ table{border-collapse:collapse;width:100%;}
   .guidegrid,.shisetsu-grid,.colgrid{grid-template-columns:repeat(2,1fr);}
   .gallery{grid-template-columns:repeat(3,1fr);}
   .bridge{grid-template-columns:1fr;}
+  .recent-list{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:720px){
   body{font-size:14.5px;}
@@ -752,6 +800,13 @@ table{border-collapse:collapse;width:100%;}
   .spectable th{width:110px;font-size:0.76rem;}
   .paybreak th{width:110px;}
   .rail-track{grid-auto-columns:270px;}
+  .dx{padding:18px;}
+  .dx-n{font-size:1.7rem;}
+  .dx-go{margin-left:0;width:100%;}
+  .recent-list{grid-template-columns:1fr;}
+  .resume-in{padding:10px 20px;gap:10px;}
+  .resume-t{font-size:0.8rem;width:100%;}
+  .resume-x{margin-left:auto;}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
