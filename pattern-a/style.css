@@ -124,16 +124,18 @@ table{border-collapse:collapse;width:100%;}
 .crumbs li+li::before{content:"\203A";margin-right:6px;color:var(--line-strong);}
 
 /* ============================================================== 夜勤ピッカー */
-.yakinhero{position:relative;background:var(--accent-strong);color:var(--accent-ink);
-  padding:44px 0 0;overflow:hidden;}
-.yakinhero-photo{position:absolute;inset:0;z-index:0;}
-.yakinhero-photo img{width:100%;height:100%;object-fit:cover;
-  filter:saturate(.7) brightness(.72) contrast(1.05);}
-.yakinhero-photo::after{content:"";position:absolute;inset:0;background:var(--accent-strong);opacity:.42;}
-.yakinhero-in{position:relative;z-index:1;}
-.yakinhero h1{font-size:2rem;color:#fff;}
-.yakinhero .h-sub{margin-top:12px;font-size:0.95rem;opacity:.85;max-width:60ch;}
-.yakinhero .h-meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:20px;font-size:0.8rem;opacity:.8;}
+/* 夜勤には負のイメージがつきやすいため、地は明るく、写真は暗く沈めずそのまま見せる。
+   選択肢も「我慢の度合い」ではなく「何が手に入るか」で並べている。 */
+.yakinhero{position:relative;padding:40px 0 0;color:var(--ink);
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface) 45%,var(--bg-alt) 100%);}
+.yh-top{display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:center;}
+.yh-photo{position:relative;aspect-ratio:4/3;border-radius:var(--radius-l);
+  overflow:hidden;background:var(--bg-alt);box-shadow:var(--shadow-lift);}
+.yh-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.yakinhero h1{font-size:2.05rem;color:var(--accent-strong);}
+.yakinhero .h-sub{margin-top:13px;font-size:0.93rem;color:var(--ink-soft);max-width:44ch;}
+.yakinhero .h-meta{margin-top:17px;display:flex;flex-wrap:wrap;gap:7px 18px;
+  font-size:0.78rem;color:var(--ink-faint);}
 .yakinpick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;
   transform:translateY(28px);}
 .ypick{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);
@@ -148,7 +150,13 @@ table{border-collapse:collapse;width:100%;}
 .ypick .yp-desc{font-size:0.8rem;color:var(--ink-soft);line-height:1.6;}
 .ypick .yp-where{font-size:0.72rem;color:var(--ink-faint);border-top:1px dashed var(--line);
   padding-top:8px;margin-top:auto;}
-.yakinhero-tail{height:46px;}
+.yakinhero-tail{height:46px;background:var(--bg-alt);}
+@media (max-width:860px){
+  .yh-top{grid-template-columns:1fr;gap:22px;}
+  .yakinhero h1{font-size:1.74rem;}
+  .yakinhero .h-sub{max-width:none;}
+  .yh-photo{aspect-ratio:16/8;}
+}
 
 /* ============================================ 掲載情報の充実度（カバレッジ） */
 .coverage{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -685,8 +693,11 @@ table{border-collapse:collapse;width:100%;}
   body{font-size:14.5px;}
   .band{padding:40px 0;}
   .band-head h2{font-size:1.24rem;}
-  .yakinhero{padding-top:30px;}
-  .yakinhero h1{font-size:1.52rem;}
+  .yakinhero{padding-top:28px;}
+  /* モバイルは写真を出すと3択が画面外に落ちるため、選択肢を優先して非表示にする */
+  .yh-photo{display:none;}
+  .yh-top{gap:0;}
+  .yakinhero h1{font-size:1.56rem;}
   .yakinhero .h-sub{margin-top:9px;}
   .yakinhero .h-meta{margin-top:12px;gap:5px 14px;font-size:0.74rem;}
   /* 夜勤カードは縦積みの箱ではなく、見出し＋件数を1行に納めた行型にする */

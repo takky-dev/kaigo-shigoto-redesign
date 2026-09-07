@@ -309,17 +309,21 @@ def hero_yakin():
       <span class="yp-where">主な施設：{e(where)}</span>
     </a>""")
     return f"""<section class="yakinhero">
-  <div class="yakinhero-photo" aria-hidden="true">
-    <img src="{img('hero-a-yakin.jpg')}" alt="" loading="eager">
-  </div>
   <div class="wrap yakinhero-in">
-    <h1>夜勤から決める、介護の仕事。</h1>
-    <p class="h-sub">特養・老健・デイ・訪問介護まで。介護の求人を毎日更新。会員登録なしで直接応募できます。</p>
-    <div class="h-meta">
-      <span>掲載求人 {fmt(D.TOTAL_JOBS)}件</span>
-      <span>掲載事業所 {fmt(D.TOTAL_COMPANIES)}法人</span>
-      <span>本日の新着 {fmt(D.TODAY_NEW)}件</span>
-      <span>最終更新 {e(D.UPDATED)}</span>
+    <div class="yh-top">
+      <div class="yh-copy">
+        <h1>夜勤は、自分で選べる。</h1>
+        <p class="h-sub">特養・老健・デイ・訪問介護まで。介護の求人を毎日更新。会員登録なしで直接応募できます。</p>
+        <div class="h-meta">
+          <span>掲載求人 {fmt(D.TOTAL_JOBS)}件</span>
+          <span>掲載事業所 {fmt(D.TOTAL_COMPANIES)}法人</span>
+          <span>本日の新着 {fmt(D.TODAY_NEW)}件</span>
+          <span>最終更新 {e(D.UPDATED)}</span>
+        </div>
+      </div>
+      <div class="yh-photo">
+        <img src="{img('hero-a-yakin.jpg')}" alt="夜勤帯に職員が入居者に付き添っている様子" loading="eager">
+      </div>
     </div>
     <div class="yakinpick">{''.join(picks)}</div>
   </div>
