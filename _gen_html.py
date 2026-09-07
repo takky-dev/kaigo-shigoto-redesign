@@ -313,13 +313,13 @@ def table_jobs(jobs):
       </div>
       <div class="jt-tags">{tags}</div>
     </td>
-    <td><span class="jt-pay">{e(j['pay_main'])}</span>
+    <td data-label="給与"><span class="jt-pay">{e(j['pay_main'])}</span>
       <p class="jt-paynote">{e(j['employment'])}</p></td>
-    <td class="jt-shift"><span class="jt-yakin {yakin_class(j)}">{e(j['shift'])}</span></td>
-    <td>{e(j['pref'])}<p class="jt-paynote">{e(shisetsu_of(j)[2])}</p></td>
-    <td><div class="jt-has">{tl}{vo}</div></td>
-    <td class="jt-updated">{e(j['updated'])}</td>
-    <td class="jt-act"><a class="btn btn-main" href="{D.apply_file(j['id'])}">応募</a></td>
+    <td class="jt-shift" data-label="夜勤"><span class="jt-yakin {yakin_class(j)}">{e(j['shift'])}</span></td>
+    <td data-label="勤務地">{e(j['pref'])}<p class="jt-paynote">{e(shisetsu_of(j)[2])}</p></td>
+    <td data-label="掲載情報"><div class="jt-has">{tl}{vo}</div></td>
+    <td class="jt-updated" data-label="更新日">{e(j['updated'])}</td>
+    <td class="jt-act"><a class="btn btn-main" href="{D.apply_file(j['id'])}">この求人に応募する</a></td>
   </tr>""")
     return f"""<div class="jtable-scroll"><table class="jtable">
   <thead><tr>

@@ -157,7 +157,7 @@ table{border-collapse:collapse;width:100%;}
 .cov-note{font-size:0.74rem;color:var(--ink-faint);margin-top:6px;line-height:1.5;}
 
 /* ================================================ 職種×施設種別 マトリクス表 */
-.matrixwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-m);
+.matrixwrap{overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--line);border-radius:var(--radius-m);
   background:var(--surface);}
 .matrix{min-width:760px;font-size:0.82rem;}
 .matrix th,.matrix td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);
@@ -182,7 +182,7 @@ table{border-collapse:collapse;width:100%;}
 .rail-head h3{font-size:1.14rem;}
 .rail-head p{font-size:0.8rem;color:var(--ink-soft);margin-top:5px;max-width:62ch;}
 .rail-head a{font-size:0.8rem;color:var(--accent);white-space:nowrap;}
-.rail-track{display:grid;grid-auto-flow:column;grid-auto-columns:342px;gap:14px;
+.rail-track{overscroll-behavior-x:contain;display:grid;grid-auto-flow:column;grid-auto-columns:342px;gap:14px;
   overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;}
 .rail-track>*{scroll-snap-align:start;}
 .rail-track::-webkit-scrollbar{height:8px;}
@@ -384,7 +384,7 @@ table{border-collapse:collapse;width:100%;}
 .jt-act .btn{padding:8px 16px;font-size:0.78rem;white-space:nowrap;}
 .jt-updated{font-size:0.7rem;color:var(--ink-faint);font-family:var(--font-num);
   white-space:nowrap;}
-.jtable-scroll{overflow-x:auto;border-radius:var(--radius-m);}
+.jtable-scroll{overflow-x:auto;overscroll-behavior-x:contain;border-radius:var(--radius-m);}
 
 /* ================================================== 検索フォーム（ヒーローC） */
 .searchhero{background:var(--surface);border-bottom:1px solid var(--line);padding:40px 0 44px;}
@@ -458,7 +458,7 @@ table{border-collapse:collapse;width:100%;}
 .souba tbody tr:hover{background:var(--surface-alt);}
 .souba-gauge{display:block;height:5px;background:var(--accent);border-radius:99px;margin-top:5px;}
 .souba-note{font-size:0.75rem;color:var(--ink-faint);margin-top:10px;line-height:1.7;}
-.soubawrap{overflow-x:auto;}
+.soubawrap{overflow-x:auto;overscroll-behavior-x:contain;}
 
 /* =========================================================== 施設種別カード */
 .shisetsu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
@@ -799,6 +799,27 @@ table{border-collapse:collapse;width:100%;}
   .article h1,.static h1{font-size:1.3rem;}
   .spectable th{width:110px;font-size:0.76rem;}
   .paybreak th{width:110px;}
+  /* 求人テーブルはスマホでは表をやめて縦積みにする。
+     7列を390pxで横スクロールさせても比較にならず、縦スワイプが横スクロールに
+     取られてページが揺れる原因にもなっていたため。 */
+  .jtable-scroll{overflow-x:visible;}
+  .jtable{border:0;background:transparent;}
+  .jtable thead{display:none;}
+  .jtable tbody,.jtable tr,.jtable td{display:block;width:auto;}
+  .jtable tbody tr{background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius-m);padding:14px 16px;margin-bottom:10px;}
+  .jtable tbody tr:hover{background:var(--surface);}
+  .jtable td{padding:0;border:0;}
+  .jtable td + td{display:grid;grid-template-columns:5.2em 1fr;gap:10px;
+    align-items:baseline;padding:7px 0;border-top:1px solid var(--line);}
+  .jtable td[data-label]::before{content:attr(data-label);font-size:0.72rem;
+    color:var(--ink-faint);}
+  .jt-main{min-width:0;padding-bottom:10px!important;}
+  .jt-shift .jt-yakin{max-width:none;}
+  .jt-updated{font-size:0.78rem;}
+  /* 項目名の列を持たないので、td + td のグリッドから外して全幅にする */
+  .jtable .jt-act{display:block;padding-top:12px;border-top:1px solid var(--line);}
+  .jtable .jt-act .btn{width:100%;padding:11px 8px;font-size:0.86rem;}
   .rail-track{grid-auto-columns:270px;}
   .dx{padding:18px;}
   .dx-n{font-size:1.7rem;}
