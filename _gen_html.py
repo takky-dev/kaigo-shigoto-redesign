@@ -1624,6 +1624,7 @@ PLACEHOLDER_LABELS = {
     "cat-tokuyou": "特別養護老人ホーム",
     "cat-roken": "介護老人保健施設",
     "cat-yuuryou": "有料老人ホーム",
+    "cat-group": "グループホーム",
     "cat-sakoju": "サービス付き高齢者向け住宅",
     "cat-day": "デイサービス",
     "cat-houmon": "訪問介護",
