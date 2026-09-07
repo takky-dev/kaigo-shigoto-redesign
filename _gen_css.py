@@ -110,8 +110,8 @@ table{border-collapse:collapse;width:100%;}
   padding:44px 0 0;overflow:hidden;}
 .yakinhero-photo{position:absolute;inset:0;z-index:0;}
 .yakinhero-photo img{width:100%;height:100%;object-fit:cover;
-  filter:saturate(.65) brightness(.62) contrast(1.05);}
-.yakinhero-photo::after{content:"";position:absolute;inset:0;background:var(--accent-strong);opacity:.74;}
+  filter:saturate(.7) brightness(.72) contrast(1.05);}
+.yakinhero-photo::after{content:"";position:absolute;inset:0;background:var(--accent-strong);opacity:.42;}
 .yakinhero-in{position:relative;z-index:1;}
 .yakinhero h1{font-size:2rem;color:#fff;}
 .yakinhero .h-sub{margin-top:12px;font-size:0.95rem;opacity:.85;max-width:60ch;}
