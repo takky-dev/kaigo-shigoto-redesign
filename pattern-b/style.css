@@ -719,6 +719,33 @@ table{border-collapse:collapse;width:100%;}
 .spectable th{width:150px;background:var(--surface-alt);font-weight:700;font-size:0.8rem;
   color:var(--ink-soft);}
 .spectable tr:last-child th,.spectable tr:last-child td{border-bottom:0;}
+/* モデル月収の積み上げバー。幅は flex-grow に実額を渡して丸め誤差なく比率どおりにする。
+   色は疑似要素側に置き、透明度で段階を作っても凡例の文字が薄くならないようにしている。 */
+.paystack{margin-bottom:14px;}
+.ps-head{display:flex;align-items:baseline;gap:10px;margin:0 0 7px;
+  font-size:0.8rem;color:var(--ink-soft);}
+.ps-head b{margin-left:auto;font-family:var(--font-num);font-size:1.12rem;
+  font-weight:700;color:var(--ink);letter-spacing:.01em;}
+.ps-bar{display:flex;height:26px;border-radius:var(--radius-s);overflow:hidden;
+  background:var(--surface-alt);border:1px solid var(--line);}
+.ps-seg{position:relative;flex:1 1 0;min-width:2px;}
+.ps-seg + .ps-seg{border-left:1px solid var(--surface);}
+.ps-seg::before{content:"";position:absolute;inset:0;background:var(--accent);}
+.ps-seg.t2::before{opacity:.58;}
+.ps-seg.t3::before{opacity:.34;}
+.ps-seg.night::before{background:var(--warm-strong);opacity:1;}
+.ps-legend{list-style:none;margin:9px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:5px 20px;}
+.ps-legend li{display:flex;align-items:center;gap:7px;font-size:0.79rem;color:var(--ink-soft);}
+.ps-key{width:11px;height:11px;border-radius:2px;flex:none;position:relative;
+  background:var(--surface-alt);}
+.ps-key::before{content:"";position:absolute;inset:0;border-radius:2px;background:var(--accent);}
+.ps-key.t2::before{opacity:.58;}
+.ps-key.t3::before{opacity:.34;}
+.ps-key.night::before{background:var(--warm-strong);opacity:1;}
+.ps-legend b{font-family:var(--font-num);font-weight:700;color:var(--ink);}
+.ps-p{font-family:var(--font-num);color:var(--ink-faint);font-size:0.74rem;}
+.ps-note{margin:9px 0 0;font-size:0.79rem;color:var(--ink-soft);}
+.ps-note b{font-family:var(--font-num);color:var(--warm-strong);font-weight:700;}
 .paybreak{width:100%;font-size:0.86rem;background:var(--surface);border:1px solid var(--line);}
 .paybreak th,.paybreak td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;}
 .paybreak th{background:var(--surface-alt);font-weight:700;width:150px;font-size:0.8rem;}
@@ -899,6 +926,11 @@ table{border-collapse:collapse;width:100%;}
   .article h1,.static h1{font-size:1.3rem;}
   .spectable th{width:110px;font-size:0.76rem;}
   .paybreak th{width:110px;}
+  .ps-legend{flex-direction:column;gap:4px;}
+  .ps-legend li{width:100%;}
+  .ps-legend b{margin-left:auto;}
+  /* 割合の桁数（8%と80%）で金額の右端がずれないよう、割合の幅を固定する */
+  .ps-p{width:2.6em;text-align:right;}
   /* 求人テーブルはスマホでは表をやめて縦積みにする。
      7列を390pxで横スクロールさせても比較にならず、縦スワイプが横スクロールに
      取られてページが揺れる原因にもなっていたため。 */

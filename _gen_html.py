@@ -1042,9 +1042,51 @@ def block_paybreak(j):
     rows = "".join(f"<tr><th scope=\"row\">{e(k)}</th><td>{e(v)}</td></tr>" for k, v in j["pay_rows"])
     return f"""<section class="jobsec">
   <h2>給与の内訳</h2>
-  <table class="paybreak"><caption class="sr-only">給与の内訳</caption><tbody>{rows}</tbody></table>
-  <p class="paymodel">モデル月収：{e(j['pay_model'])}</p>
+{pay_stack(j)}  <table class="paybreak"><caption class="sr-only">給与の内訳</caption><tbody>{rows}</tbody></table>
+  <p class="paymodel">※ {e(j['pay_model'])}</p>
 </section>"""
+
+
+def pay_stack(j):
+    """モデル月収の内訳を積み上げバーで見せる。
+
+    基本給と手当の比率が絵で分かると「夜勤を外すといくら下がるか」が
+    一目で読める。時給制の求人は内訳が分解できないため出さない。
+    幅は flex-grow に実額をそのまま渡すので、丸め誤差なく合計と一致する。
+    """
+    st = j.get("pay_stack") or []
+    if len(st) < 2:
+        return ""
+    total = sum(v for _, v in st)
+    # 各項目を独立に四捨五入すると凡例の合計が99%や101%になるため、
+    # 最大剰余法で配分し、表示上の合計をきっちり100%にする
+    raw = [v / total * 100 for _, v in st]
+    pcts = [int(x) for x in raw]
+    for i in sorted(range(len(st)), key=lambda i: raw[i] - pcts[i], reverse=True)[:100 - sum(pcts)]:
+        pcts[i] += 1
+
+    segs, legs = [], []
+    for i, (label, v) in enumerate(st):
+        night = "夜勤" in label
+        cls = "night" if night else ("t1" if i == 0 else ("t2" if i == 1 else "t3"))
+        segs.append(
+            f'<span class="ps-seg {cls}" style="flex-grow:{v}" '
+            f'title="{e(label)} {v:,}円（{pcts[i]}%）"></span>'
+        )
+        legs.append(
+            f'<li><i class="ps-key {cls}"></i><span class="ps-k">{e(label)}</span>'
+            f'<b>{v:,}円</b><span class="ps-p">{pcts[i]}%</span></li>'
+        )
+    night_sum = sum(v for label, v in st if "夜勤" in label)
+    note = (f'<p class="ps-note">夜勤手当を除くと <b>{total - night_sum:,}円</b>／月になります。</p>'
+            if night_sum else "")
+    return f"""  <div class="paystack">
+    <p class="ps-head"><span>モデル月収の内訳</span><b>{total:,}円</b></p>
+    <div class="ps-bar" role="img" aria-label="モデル月収{total:,}円の内訳。{e('、'.join(f'{k} {v:,}円' for k, v in st))}">{''.join(segs)}</div>
+    <ul class="ps-legend">{''.join(legs)}</ul>
+    {note}
+  </div>
+"""
 
 
 def block_work(j):
