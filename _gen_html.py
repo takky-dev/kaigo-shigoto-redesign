@@ -58,7 +58,8 @@ def img(name):
 
 
 def yakin_class(j):
-    return "y-none" if j["yakin"] == "none" else "y-some"
+    # 夜勤専従はヒーローの3択の一つなので、夜勤ありと同じ見た目にしない
+    return {"none": "y-none", "some": "y-some", "senju": "y-senju"}[j["yakin"]]
 
 
 def shoku_of(j):
@@ -771,7 +772,21 @@ def sec_voices(p):
 
 
 def sec_story_jobs(p):
-    jobs = [j for j in D.JOBS if j["has_timeline"] or j["has_voice"]][:5]
+    """Bは1件あたりの面積が大きいので5件に絞る。ただしID順の先頭5件を取ると
+    夜勤なしばかりになり、サイト全体の比率（夜勤なし33%）と食い違うため、
+    夜勤なし・あり・専従を1件ずつ先に確保してから残りを埋める。"""
+    pool = [j for j in D.JOBS if j["has_timeline"] or j["has_voice"]]
+    picked = []
+    for k in ("none", "some", "senju"):
+        first = next((j for j in pool if j["yakin"] == k), None)
+        if first:
+            picked.append(first)
+    for j in pool:
+        if len(picked) >= 5:
+            break
+        if j not in picked:
+            picked.append(j)
+    jobs = sorted(picked, key=lambda j: j["id"])[:5]
     return f"""<section class="band band-tint">
   <div class="wrap">
     <div class="band-head">
@@ -1112,6 +1127,20 @@ def _mins(hhmm):
     return int(h) * 60 + int(m)
 
 
+def _mins_seq(tl):
+    """時刻の並びを通し分に直す。夜勤は日付をまたぐため、時刻が前の項目より
+    小さくなったところで24時間足す。そのまま引き算すると所要時間が負になり、
+    帯の幅が壊れる。"""
+    out, add, prev = [], 0, None
+    for row in tl:
+        m = _mins(row[0])
+        if prev is not None and m < prev:
+            add += 24 * 60
+        prev = m
+        out.append(m + add)
+    return out
+
+
 def _dur_label(m):
     h, mi = divmod(m, 60)
     if h and mi:
@@ -1127,16 +1156,16 @@ def block_timeline(j):
     if not j["has_timeline"]:
         return ""
     tl = j["timeline"]
-    start, end = _mins(tl[0][0]), _mins(tl[-1][0])
-    span = max(end - start, 1)
+    at = _mins_seq(tl)
+    span = max(at[-1] - at[0], 1)
 
     # 帯：各項目から次の項目までを、実際の所要時間に比例した幅で並べる
     segs = []
     for i in range(len(tl) - 1):
         t, label, _d = tl[i]
-        dur = _mins(tl[i + 1][0]) - _mins(t)
+        dur = at[i + 1] - at[i]
         w = dur / span * 100
-        kind = " rest" if ("休憩" in label or "昼食" in label) else ""
+        kind = " rest" if any(x in label for x in ("休憩", "昼食", "仮眠")) else ""
         segs.append(
             f'<span class="tb-seg{kind}" style="width:{w:.2f}%" '
             f'title="{e(t)}〜{e(tl[i + 1][0])}　{e(label)}（{_dur_label(dur)}）">'
@@ -1147,7 +1176,7 @@ def block_timeline(j):
     for i, (t, l, d) in enumerate(tl):
         dur = ""
         if i < len(tl) - 1:
-            dur = f'<span class="daily-dur">{_dur_label(_mins(tl[i + 1][0]) - _mins(t))}</span>'
+            dur = f'<span class="daily-dur">{_dur_label(at[i + 1] - at[i])}</span>'
         rows.append(f"""<div class="daily-row">
     <div class="daily-time">{e(t)}{dur}</div>
     <div class="daily-axis" aria-hidden="true"></div>

@@ -339,6 +339,8 @@ table{border-collapse:collapse;width:100%;}
 /* 夜勤ありを警告色にしない。昼＝淡い緑、夜＝藍。優劣ではなく時間帯の対比として扱う */
 .chip-yakin.y-none{color:#2C6B5A;background:#E9F2EF;border-color:#B4D0C7;}
 .chip-yakin.y-some{color:#3B4A78;background:#EDEFF8;border-color:#BFC7E2;}
+/* 夜勤専従は夜勤ありと同じ藍の系統で、一段深くして区別する（別の色相にすると優劣に見える） */
+.chip-yakin.y-senju{color:#2A3560;background:#DFE4F2;border-color:#A5B1D4;}
 .chip-emp{font-size:0.7rem;color:var(--ink-soft);border:1px solid var(--line-strong);
   padding:3px 9px;border-radius:var(--radius-s);}
 .jrow-updated{margin-left:auto;font-size:0.7rem;color:var(--ink-faint);font-family:var(--font-num);}
@@ -733,7 +735,12 @@ table{border-collapse:collapse;width:100%;}
 .ps-seg::before{content:"";position:absolute;inset:0;background:var(--accent);}
 .ps-seg.t2::before{opacity:.58;}
 .ps-seg.t3::before{opacity:.34;}
-.ps-seg.night::before{background:var(--warm-strong);opacity:1;}
+/* 夜勤手当は「回数で変わる部分」なので斜線で示す。赤やオレンジで塗ると
+   夜勤が警告扱いに見え、同じページの夜勤チップ（藍）とも食い違うため色は変えない。 */
+.ps-seg.night::before{background:var(--accent);opacity:.86;}
+.ps-seg.night::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.34) 0 4px,
+    rgba(255,255,255,0) 4px 9px);}
 .ps-legend{list-style:none;margin:9px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:5px 20px;}
 .ps-legend li{display:flex;align-items:center;gap:7px;font-size:0.79rem;color:var(--ink-soft);}
 .ps-key{width:11px;height:11px;border-radius:2px;flex:none;position:relative;
@@ -741,11 +748,14 @@ table{border-collapse:collapse;width:100%;}
 .ps-key::before{content:"";position:absolute;inset:0;border-radius:2px;background:var(--accent);}
 .ps-key.t2::before{opacity:.58;}
 .ps-key.t3::before{opacity:.34;}
-.ps-key.night::before{background:var(--warm-strong);opacity:1;}
+.ps-key.night::before{background:var(--accent);opacity:.86;}
+.ps-key.night::after{content:"";position:absolute;inset:0;border-radius:2px;
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.40) 0 2px,
+    rgba(255,255,255,0) 2px 5px);}
 .ps-legend b{font-family:var(--font-num);font-weight:700;color:var(--ink);}
 .ps-p{font-family:var(--font-num);color:var(--ink-faint);font-size:0.74rem;}
 .ps-note{margin:9px 0 0;font-size:0.79rem;color:var(--ink-soft);}
-.ps-note b{font-family:var(--font-num);color:var(--warm-strong);font-weight:700;}
+.ps-note b{font-family:var(--font-num);color:var(--ink);font-weight:700;}
 .paybreak{width:100%;font-size:0.86rem;background:var(--surface);border:1px solid var(--line);}
 .paybreak th,.paybreak td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;}
 .paybreak th{background:var(--surface-alt);font-weight:700;width:150px;font-size:0.8rem;}
