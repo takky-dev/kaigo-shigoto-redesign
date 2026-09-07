@@ -6,6 +6,7 @@
 """
 import os
 import re
+import hashlib
 import html as _html
 from _patterns import PATTERNS
 import _data as D
@@ -22,6 +23,21 @@ NAV = [
 ]
 
 SHOKU_IDX = {k: i + 1 for i, (k, *_rest) in enumerate(D.SHOKUSHU)}
+
+# style.css の内容から算出したバージョン。<link> に ?v= として付けることで、
+# CSSを直したのにブラウザやCDNが古い版を配り続ける状態を防ぐ。
+CSS_VER = ""
+
+
+def set_css_ver(pattern_key):
+    """そのパターンの style.css の内容ハッシュを CSS_VER に設定する。"""
+    global CSS_VER
+    path = os.path.join(ROOT, pattern_key, "style.css")
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            CSS_VER = hashlib.sha1(f.read()).hexdigest()[:8]
+    else:
+        CSS_VER = ""
 
 
 def e(s):
@@ -67,7 +83,7 @@ def head(p, key, title, desc, page):
 <title>{e(title)}｜{e(D.BRAND_EN)}</title>
 <meta name="description" content="{e(desc)}">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css{('?v=' + CSS_VER) if CSS_VER else ''}">
 </head>
 <body data-page="{e(page)}">
 """
@@ -1426,6 +1442,7 @@ def main():
     for key, p in PATTERNS.items():
         out = os.path.join(ROOT, key)
         os.makedirs(out, exist_ok=True)
+        set_css_ver(key)
         pages = {
             "index.html": page_index(p),
             "list.html": page_list(p),
