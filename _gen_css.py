@@ -65,14 +65,16 @@ table{border-collapse:collapse;width:100%;}
   clip:rect(0,0,0,0);}
 @media (max-width:1040px){
   .burger{display:flex;}
+  /* 閉じている間は border を持たせない。max-height:0 でもボーダーは描画され、
+     1pxの線がヘッダーの下線に重なって見えてしまうため */
   .mastnav{position:fixed;inset:66px 0 auto 0;background:var(--surface);
-    border-bottom:1px solid var(--line);margin-left:0;
+    border-bottom:0;margin-left:0;
     max-height:0;overflow:hidden;transition:max-height .22s ease;}
   .mastnav ul{flex-direction:column;gap:0;padding:0 20px;}
   .mastnav li{border-bottom:1px solid var(--line);}
   .mastnav li:last-child{border-bottom:0;}
   .mastnav a{display:block;padding:15px 0;font-size:0.95rem;border-bottom:0;}
-  .navtoggle:checked ~ .mastnav{max-height:400px;}
+  .navtoggle:checked ~ .mastnav{max-height:400px;border-bottom:1px solid var(--line);}
   .navtoggle:focus-visible ~ .masthead-in .burger{outline:3px solid var(--warm);outline-offset:2px;}
 }
 
