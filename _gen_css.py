@@ -113,7 +113,10 @@ table{border-collapse:collapse;width:100%;}
 .yh-top{display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:center;}
 .yh-photo{position:relative;aspect-ratio:4/3;border-radius:var(--radius-l);
   overflow:hidden;background:var(--bg-alt);box-shadow:var(--shadow-lift);}
-.yh-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+/* 横長に切り抜くと上端が白いホワイトボードと窓に当たって白帯に見えるため、
+   切り取りの中心を下げて人物と手元が入るようにする */
+.yh-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 66%;}
 .yakinhero h1{font-size:2.05rem;color:var(--accent-strong);}
 .yakinhero .h-sub{margin-top:13px;font-size:0.93rem;color:var(--ink-soft);max-width:44ch;}
 .yakinhero .h-meta{margin-top:17px;display:flex;flex-wrap:wrap;gap:7px 18px;
