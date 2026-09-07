@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1250" width="2000" height="1250" role="img" aria-label="朝の共有スペースのイメージ写真（パターンB）（未配置）">
+  <rect width="2000" height="1250" fill="#D8CFE0"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.45">
+    <circle cx="1000.0" cy="598.0" r="27.0"/>
+    <path d="M955.0 670.0c0-45.0 21.0-81.0 45.0-81.0s45.0 36.0 45.0 81.0z"/>
+  </g>
+  <text x="1000.0" y="715.0" text-anchor="middle" font-family="sans-serif" font-size="30"
+    fill="#FFFFFF" opacity="0.85">朝の共有スペースのイメージ写真（パターンB）</text>
+  <text x="1000.0" y="748.6" text-anchor="middle" font-family="sans-serif" font-size="21"
+    fill="#FFFFFF" opacity="0.6">写真未配置（差し替え用プレースホルダー）</text>
+</svg>

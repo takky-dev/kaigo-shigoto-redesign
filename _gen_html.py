@@ -309,7 +309,10 @@ def hero_yakin():
       <span class="yp-where">主な施設：{e(where)}</span>
     </a>""")
     return f"""<section class="yakinhero">
-  <div class="wrap">
+  <div class="yakinhero-photo" aria-hidden="true">
+    <img src="{img('hero-a-yakin.jpg')}" alt="" loading="eager">
+  </div>
+  <div class="wrap yakinhero-in">
     <h1>介護の求人は、夜勤をどうするかで<br>選べる範囲が変わります。</h1>
     <p class="h-sub">{e(D.TAGLINE)}。まず夜勤の条件を決めてから、職種と施設種別で絞り込めます。会員登録は不要で、掲載施設へ直接応募いただけます。</p>
     <div class="h-meta">
@@ -326,11 +329,12 @@ def hero_yakin():
 
 def hero_timeline():
     j = D.JOBS_BY_ID[1]
+    peek = j["timeline"][:4]
     rows = "".join(f"""<div class="daily-row">
       <div class="daily-time">{e(t)}</div>
       <div class="daily-axis" aria-hidden="true"></div>
       <div class="daily-body"><p class="daily-label">{e(l)}</p></div>
-    </div>""" for t, l, _d in j["timeline"])
+    </div>""" for t, l, _d in peek)
     return f"""<section class="timelinehero">
   <div class="wrap thero-grid">
     <div class="thero-copy">
@@ -347,13 +351,18 @@ def hero_timeline():
       </div>
     </div>
     <div class="thero-card">
-      <div class="tc-top">
-        <span class="who">{e(j['timeline_label'])}</span>
-        <span class="at">{e(j['facility'])}／{e(j['title'])}</span>
+      <div class="thero-photo">
+        <img src="{img('hero-b-day.jpg')}" alt="介護施設の明るい共有スペースで職員と利用者が会話している様子" loading="eager">
       </div>
-      <div class="daily">{rows}</div>
-      <p class="tc-foot">この求人には給与の内訳・職員構成・働く人の声も掲載されています。
-        <a href="{D.job_file(j['id'])}">求人を見る →</a></p>
+      <div class="thero-card-body">
+        <div class="tc-top">
+          <span class="who">{e(j['timeline_label'])}</span>
+          <span class="at">{e(j['facility'])}／{e(j['title'])}</span>
+        </div>
+        <div class="daily">{rows}</div>
+        <p class="tc-foot">退勤までの続き、給与の内訳・職員構成・働く人の声も求人ページに掲載しています。
+          <a href="{D.job_file(j['id'])}">求人を見る →</a></p>
+      </div>
     </div>
   </div>
 </section>"""
@@ -386,6 +395,10 @@ def hero_search():
       <span><b>{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</span>
       <span><b>{fmt(D.TODAY_NEW)}</b>本日の新着</span>
       <span>最終更新 {e(D.UPDATED)}</span>
+    </div>
+    <div class="searchhero-photo">
+      <img src="{img('hero-c-genba.jpg')}" alt="介護記録に記入する職員の手元" loading="eager">
+      <span class="cap">現場の記録から生まれた検索軸です</span>
     </div>
     <form class="sform" action="list.html" method="get">
       <div class="sform-row"><div class="k"><label for="kw">キーワード</label></div>
@@ -1283,6 +1296,13 @@ PLACEHOLDER_LABELS = {
 }
 PLACEHOLDER_COLORS = ["#D9E3EC", "#DCE6DE", "#E8E1EC", "#EDE4D9", "#DDE7EA", "#E6DEDA"]
 
+# パターン専用のヒーロー写真（横長）。カテゴリ写真とは別に1枚ずつ用意する。
+HERO_PLACEHOLDERS = {
+    "hero-a-yakin": ("夜勤帯のイメージ写真（パターンA）", "#1B3B54", 2400, 900),
+    "hero-b-day": ("朝の共有スペースのイメージ写真（パターンB）", "#D8CFE0", 2000, 1250),
+    "hero-c-genba": ("記録・手元のイメージ写真（パターンC）", "#3A4250", 2400, 640),
+}
+
 
 def write_placeholders():
     os.makedirs(IMGDIR, exist_ok=True)
@@ -1300,6 +1320,27 @@ def write_placeholders():
     fill="#5A6470">{label}</text>
   <text x="800" y="682" text-anchor="middle" font-family="sans-serif" font-size="21"
     fill="#8A939E">写真未配置（差し替え用プレースホルダー）</text>
+</svg>
+"""
+        with open(os.path.join(IMGDIR, stem + ".svg"), "w", encoding="utf-8") as f:
+            f.write(svg)
+
+    for stem, (label, bg, w, h) in HERO_PLACEHOLDERS.items():
+        if os.path.exists(os.path.join(IMGDIR, stem + ".jpg")):
+            continue
+        cx, cy = w / 2, h / 2
+        fs_label = max(20, min(30, w // 55))
+        fs_sub = max(15, fs_label - 9)
+        svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{label}（未配置）">
+  <rect width="{w}" height="{h}" fill="{bg}"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.45">
+    <circle cx="{cx}" cy="{cy - fs_label * 0.9}" r="{fs_label * 0.9}"/>
+    <path d="M{cx - fs_label * 1.5} {cy + fs_label * 1.5}c0-{fs_label * 1.5} {fs_label * 0.7}-{fs_label * 2.7} {fs_label * 1.5}-{fs_label * 2.7}s{fs_label * 1.5} {fs_label * 1.2} {fs_label * 1.5} {fs_label * 2.7}z"/>
+  </g>
+  <text x="{cx}" y="{cy + fs_label * 3}" text-anchor="middle" font-family="sans-serif" font-size="{fs_label}"
+    fill="#FFFFFF" opacity="0.85">{label}</text>
+  <text x="{cx}" y="{cy + fs_label * 3 + fs_sub * 1.6}" text-anchor="middle" font-family="sans-serif" font-size="{fs_sub}"
+    fill="#FFFFFF" opacity="0.6">写真未配置（差し替え用プレースホルダー）</text>
 </svg>
 """
         with open(os.path.join(IMGDIR, stem + ".svg"), "w", encoding="utf-8") as f:
