@@ -30,9 +30,10 @@ SHOKUSHU_BY_KEY = {s[0]: s for s in SHOKUSHU}
 # ---------------------------------------------------------------- 施設種別
 # key, 表示名, 短縮名, 写真, 件数, 夜勤の一般的な状況, 説明
 SHISETSU = [
-    ("tokuyou", "特別養護老人ホーム",           "特養",   "cat-tokuyou.jpg", 1842, "夜勤あり", "要介護3以上の方が長期入所する公的施設。夜勤ありのシフト制が基本。"),
+    ("tokuyou", "特別養護老人ホーム",           "特養",   "cat-tokuyou.jpg", 1628, "夜勤あり", "要介護3以上の方が長期入所する公的施設。夜勤ありのシフト制が基本。"),
     ("roken",   "介護老人保健施設",             "老健",   "cat-roken.jpg",    968, "夜勤あり", "在宅復帰を目指すリハビリ中心の施設。看護師・リハ職との連携が多い。"),
-    ("yuuryou", "有料老人ホーム",               "有料",   "cat-yuuryou.jpg", 1204, "夜勤あり", "民間運営の入居施設。施設ごとにサービス内容と給与水準の幅が大きい。"),
+    ("yuuryou", "有料老人ホーム",               "有料",   "cat-yuuryou.jpg",  906, "夜勤あり", "民間運営の入居施設。施設ごとにサービス内容と給与水準の幅が大きい。"),
+    ("group",   "グループホーム",               "GH",     "cat-sakoju.jpg",   512, "夜勤あり", "認知症の方が1ユニット9名で暮らす小規模施設。少人数で家庭的な運営が中心。"),
     ("sakoju",  "サービス付き高齢者向け住宅",   "サ高住", "cat-sakoju.jpg",   756, "夜勤少なめ", "自立度の高い方の住まい。生活支援と安否確認が中心で身体介護は比較的少ない。"),
     ("day",     "デイサービス・デイケア",       "デイ",   "cat-day.jpg",     1120, "夜勤なし", "日帰り通所。送迎とレクリエーションが業務に含まれ、夜勤が基本的にない。"),
     ("houmon",  "訪問介護",                     "訪問",   "cat-houmon.jpg",   634, "夜勤なし", "利用者の自宅を訪問して介護・生活援助を行う。直行直帰の事業所も多い。"),
@@ -46,12 +47,12 @@ TODAY_NEW = 156
 # ------------------------------------------------- 職種×施設種別 クロスマトリクス
 # 行=職種key, 列=施設種別key の件数。行合計・列合計が SHOKUSHU / SHISETSU と整合する。
 MATRIX = {
-    "kaigo":    {"tokuyou": 1004, "roken": 486, "yuuryou": 622, "sakoju": 372, "day": 452, "houmon": 250},
-    "soudan":   {"tokuyou":  132, "roken": 118, "yuuryou":  96, "sakoju":  58, "day": 108, "houmon":   0},
-    "caremane": {"tokuyou":  118, "roken":  84, "yuuryou": 104, "sakoju":  52, "day":  56, "houmon":  24},
-    "sabikan":  {"tokuyou":    0, "roken":   0, "yuuryou":  38, "sakoju":  74, "day":  16, "houmon": 238},
-    "kanri":    {"tokuyou":   42, "roken":  28, "yuuryou":  54, "sakoju":  22, "day":  30, "houmon":  22},
-    "kango":    {"tokuyou":  546, "roken": 252, "yuuryou": 290, "sakoju": 178, "day": 458, "houmon": 100},
+    "kaigo":    {"tokuyou": 854, "roken": 486, "yuuryou": 412, "group": 360, "sakoju": 372, "day": 452, "houmon": 250},
+    "soudan":   {"tokuyou": 132, "roken": 118, "yuuryou":  96, "group":   0, "sakoju":  58, "day": 108, "houmon":   0},
+    "caremane": {"tokuyou":  88, "roken":  84, "yuuryou":  72, "group":  62, "sakoju":  52, "day":  56, "houmon":  24},
+    "sabikan":  {"tokuyou":   0, "roken":   0, "yuuryou":  38, "group":   0, "sakoju":  74, "day":  16, "houmon": 238},
+    "kanri":    {"tokuyou":  30, "roken":  28, "yuuryou":  16, "group":  50, "sakoju":  22, "day":  30, "houmon":  22},
+    "kango":    {"tokuyou": 524, "roken": 252, "yuuryou": 272, "group":  40, "sakoju": 178, "day": 458, "houmon": 100},
 }
 
 # ---------------------------------------------------------------- 夜勤軸（第一軸）
@@ -407,7 +408,7 @@ JOBS = [
     },
     {
         "id": 7, "slug": "-7", "key": "結の家",
-        "shokushu": "kanri", "shisetsu": "yuuryou",
+        "shokushu": "kanri", "shisetsu": "group",
         "facility": "グループホーム 結の家",
         "title": "施設長・管理者候補",
         "employment": "正社員",

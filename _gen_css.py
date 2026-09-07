@@ -163,7 +163,7 @@ table{border-collapse:collapse;width:100%;}
 /* ================================================ 職種×施設種別 マトリクス表 */
 .matrixwrap{overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--line);border-radius:var(--radius-m);
   background:var(--surface);}
-.matrix{min-width:760px;font-size:0.82rem;}
+.matrix{min-width:880px;font-size:0.82rem;}
 .matrix th,.matrix td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);
   padding:9px 10px;text-align:center;}
 .matrix thead th{background:var(--bg-alt);font-size:0.76rem;font-weight:700;white-space:nowrap;}
@@ -419,7 +419,7 @@ table{border-collapse:collapse;width:100%;}
   border-right:1px solid var(--line);display:flex;align-items:center;}
 .sform-row>.v{padding:12px 14px;background:var(--surface);}
 .sform input[type=text]{width:100%;max-width:420px;padding:10px 12px;border:1px solid var(--line-strong);
-  border-radius:var(--radius-s);font:inherit;font-size:0.88rem;background:var(--surface);
+  border-radius:var(--radius-s);font:inherit;font-size:16px;background:var(--surface);
   color:var(--ink);}
 .pillset{display:flex;flex-wrap:wrap;gap:6px;}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:0.76rem;padding:6px 12px;
@@ -465,7 +465,7 @@ table{border-collapse:collapse;width:100%;}
 .soubawrap{overflow-x:auto;overscroll-behavior-x:contain;}
 
 /* =========================================================== 施設種別カード */
-.shisetsu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.shisetsu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
 .shcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);
   overflow:hidden;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;}
 .shcard:hover{box-shadow:var(--shadow-lift);}
@@ -656,7 +656,7 @@ table{border-collapse:collapse;width:100%;}
 .fgroup{border-top:1px solid var(--line);padding:13px 0;}
 .fgroup>h3{font-size:0.79rem;margin-bottom:9px;color:var(--ink-soft);}
 .fgroup input[type=text]{width:100%;padding:9px 11px;border:1px solid var(--line-strong);
-  border-radius:var(--radius-s);font:inherit;font-size:0.84rem;background:var(--surface);
+  border-radius:var(--radius-s);font:inherit;font-size:16px;background:var(--surface);
   color:var(--ink);}
 .fgroup .pill{font-size:0.73rem;padding:5px 10px;}
 .filter .btn{margin-top:14px;}
@@ -700,9 +700,11 @@ table{border-collapse:collapse;width:100%;}
 .fieldrow{display:grid;gap:6px;margin-bottom:14px;}
 .fieldrow label{font-size:0.8rem;font-weight:700;}
 .fieldrow .req{color:var(--warm-strong);font-size:0.72rem;margin-left:5px;}
-.fieldrow input,.fieldrow select,.fieldrow textarea{padding:11px 12px;
+/* iOSは16px未満の入力欄にフォーカスすると自動でズームする。
+   応募フォームで起きると入力のたびに画面が拡大され、最後まで進めない。 */
+.fieldrow input,.fieldrow select,.fieldrow textarea{padding:12px;
   border:1px solid var(--line-strong);border-radius:var(--radius-s);font:inherit;
-  font-size:0.88rem;background:var(--surface);color:var(--ink);width:100%;}
+  font-size:16px;background:var(--surface);color:var(--ink);width:100%;}
 .fieldrow .hint{font-size:0.74rem;color:var(--ink-faint);}
 .applyfoot{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
 .applynote{font-size:0.76rem;color:var(--ink-faint);text-align:center;margin-top:16px;
