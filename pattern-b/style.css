@@ -378,7 +378,10 @@ table{border-collapse:collapse;width:100%;}
 .jtable tbody tr{border-bottom:1px solid var(--line);}
 .jtable tbody tr:hover{background:var(--surface-alt);}
 .jtable td{padding:13px 12px;vertical-align:top;font-size:0.82rem;}
-.jt-main{min-width:280px;}
+.jt-main{min-width:300px;}
+.jt-head{display:flex;gap:11px;align-items:flex-start;}
+.jt-thumb{width:64px;height:48px;object-fit:cover;border-radius:var(--radius-s);
+  flex-shrink:0;background:var(--bg-alt);}
 .jt-title{font-weight:700;font-size:0.94rem;line-height:1.45;}
 .jt-title a{text-decoration:none;}
 .jt-title a:hover{text-decoration:underline;}
@@ -411,13 +414,17 @@ table{border-collapse:collapse;width:100%;}
   font-weight:600;margin-right:3px;}
 .searchhero-photo{position:relative;margin-top:22px;overflow:hidden;
   border-radius:var(--radius-s);aspect-ratio:21/6;background:var(--bg-alt);}
-.searchhero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  filter:grayscale(1) contrast(1.08) brightness(.92);}
-.searchhero-photo::after{content:"";position:absolute;inset:0;background:var(--ink);
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.35) 55%,transparent 85%);
-  mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.35) 55%,transparent 85%);opacity:.82;}
-.searchhero-photo .cap{position:absolute;left:18px;bottom:14px;color:#fff;
-  font-size:0.82rem;font-weight:600;letter-spacing:0.02em;}
+/* 介護のサイトで唯一の写真を無彩色にすると一気に冷たくなるため、色は残す */
+.searchhero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+/* キャプションは下端に置くので、暗がりも下端に敷く。
+   写真の明るさに関係なく文字が読めるようにするため */
+.searchhero-photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.74) 0%,rgba(0,0,0,.34) 28%,rgba(0,0,0,0) 62%);}
+/* ::after はキャプションより後に描画されるため、z-index を持たせないと
+   文字が暗幕の下に潜ってしまう */
+.searchhero-photo .cap{position:absolute;left:18px;right:18px;bottom:13px;z-index:1;color:#fff;
+  font-size:0.82rem;font-weight:600;letter-spacing:0.02em;
+  text-shadow:0 1px 3px rgba(0,0,0,.45);}
 .sform{margin-top:22px;border:1px solid var(--line-strong);border-radius:var(--radius-m);
   background:var(--surface-alt);overflow:hidden;}
 .sform-row{display:grid;grid-template-columns:112px 1fr;border-bottom:1px solid var(--line);}
@@ -744,6 +751,8 @@ table{border-collapse:collapse;width:100%;}
   .jstory-catch{font-size:1.06rem;}
   .jstory-in{padding:18px;}
   .jstory-photo{aspect-ratio:16/9;}
+  /* スマホでは21:6だと100pxしかなく写真の存在感が消えるため、少し高くする */
+  .searchhero-photo{aspect-ratio:16/7;}
   .sform-row{grid-template-columns:1fr;}
   .sform-row>.k{border-right:0;border-bottom:1px solid var(--line);padding:10px 14px;}
   .sform-row>.v{padding:10px 14px;}

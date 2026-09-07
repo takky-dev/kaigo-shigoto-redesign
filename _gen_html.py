@@ -297,8 +297,13 @@ def table_jobs(jobs):
         vo = '<span class="on">✓ 働く人の声</span>' if j["has_voice"] else '<span class="off">− 働く人の声</span>'
         rows.append(f"""<tr>
     <td class="jt-main">
-      <p class="jt-title"><a href="{D.job_file(j['id'])}">{e(j['title'])}</a></p>
-      <p class="jt-facility">{e(j['facility'])}</p>
+      <div class="jt-head">
+        <img class="jt-thumb" src="{img(j['photo'])}" alt="{e(shisetsu_of(j)[1])}のイメージ写真" loading="lazy" width="160" height="120">
+        <div>
+          <p class="jt-title"><a href="{D.job_file(j['id'])}">{e(j['title'])}</a></p>
+          <p class="jt-facility">{e(j['facility'])}</p>
+        </div>
+      </div>
       <div class="jt-tags">{tags}</div>
     </td>
     <td><span class="jt-pay">{e(j['pay_main'])}</span>

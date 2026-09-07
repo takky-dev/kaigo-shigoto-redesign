@@ -1,38 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap');
 :root{
-  --bg:#F5F6F8;
-  --bg-alt:#EAECF0;
+  --bg:#F7F4EF;
+  --bg-alt:#EFE8DE;
   --surface:#FFFFFF;
-  --surface-alt:#FAFBFC;
-  --ink:#1B2430;
-  --ink-soft:#5A6473;
-  --ink-faint:#8A94A3;
-  --line:#DDE1E7;
-  --line-strong:#B9C0CA;
-  --accent:#1B2430;
-  --accent-strong:#0E141C;
-  --accent-tint:#E8EAEE;
+  --surface-alt:#FBF8F4;
+  --ink:#2A241F;
+  --ink-soft:#6B6157;
+  --ink-faint:#998F84;
+  --line:#E4DCD1;
+  --line-strong:#C7BCAC;
+  --accent:#3E332A;
+  --accent-strong:#271F18;
+  --accent-tint:#F1E9DF;
   --accent-ink:#FFFFFF;
-  --warm:#C0392F;
-  --warm-strong:#9C2B22;
-  --warm-tint:#FBEAE8;
-  --radius-s:2px;
-  --radius-m:3px;
-  --radius-l:4px;
-  --shadow:0 1px 3px rgba(27,36,48,.08);
-  --shadow-lift:0 4px 14px rgba(27,36,48,.12);
-  --s1:#1B2430;
-  --s1-tint:#E8EAEE;
-  --s2:#1B2430;
-  --s2-tint:#E8EAEE;
-  --s3:#1B2430;
-  --s3-tint:#E8EAEE;
-  --s4:#1B2430;
-  --s4-tint:#E8EAEE;
-  --s5:#1B2430;
-  --s5-tint:#E8EAEE;
-  --s6:#1B2430;
-  --s6-tint:#E8EAEE;
+  --warm:#C0553A;
+  --warm-strong:#9E4029;
+  --warm-tint:#FBEDE5;
+  --radius-s:4px;
+  --radius-m:6px;
+  --radius-l:10px;
+  --shadow:0 1px 3px rgba(42,36,31,.08);
+  --shadow-lift:0 4px 14px rgba(42,36,31,.12);
+  --s1:#3E332A;
+  --s1-tint:#F1E9DF;
+  --s2:#3E332A;
+  --s2-tint:#F1E9DF;
+  --s3:#3E332A;
+  --s3-tint:#F1E9DF;
+  --s4:#3E332A;
+  --s4-tint:#F1E9DF;
+  --s5:#3E332A;
+  --s5-tint:#F1E9DF;
+  --s6:#3E332A;
+  --s6-tint:#F1E9DF;
   --font-body:'IBM Plex Sans JP', 'Hiragino Sans', sans-serif;
   --font-head:'IBM Plex Sans JP', 'Hiragino Sans', sans-serif;
   --font-num:'IBM Plex Sans JP', sans-serif;
@@ -378,7 +378,10 @@ table{border-collapse:collapse;width:100%;}
 .jtable tbody tr{border-bottom:1px solid var(--line);}
 .jtable tbody tr:hover{background:var(--surface-alt);}
 .jtable td{padding:13px 12px;vertical-align:top;font-size:0.82rem;}
-.jt-main{min-width:280px;}
+.jt-main{min-width:300px;}
+.jt-head{display:flex;gap:11px;align-items:flex-start;}
+.jt-thumb{width:64px;height:48px;object-fit:cover;border-radius:var(--radius-s);
+  flex-shrink:0;background:var(--bg-alt);}
 .jt-title{font-weight:700;font-size:0.94rem;line-height:1.45;}
 .jt-title a{text-decoration:none;}
 .jt-title a:hover{text-decoration:underline;}
@@ -411,13 +414,17 @@ table{border-collapse:collapse;width:100%;}
   font-weight:600;margin-right:3px;}
 .searchhero-photo{position:relative;margin-top:22px;overflow:hidden;
   border-radius:var(--radius-s);aspect-ratio:21/6;background:var(--bg-alt);}
-.searchhero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  filter:grayscale(1) contrast(1.08) brightness(.92);}
-.searchhero-photo::after{content:"";position:absolute;inset:0;background:var(--ink);
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.35) 55%,transparent 85%);
-  mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.35) 55%,transparent 85%);opacity:.82;}
-.searchhero-photo .cap{position:absolute;left:18px;bottom:14px;color:#fff;
-  font-size:0.82rem;font-weight:600;letter-spacing:0.02em;}
+/* 介護のサイトで唯一の写真を無彩色にすると一気に冷たくなるため、色は残す */
+.searchhero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+/* キャプションは下端に置くので、暗がりも下端に敷く。
+   写真の明るさに関係なく文字が読めるようにするため */
+.searchhero-photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.74) 0%,rgba(0,0,0,.34) 28%,rgba(0,0,0,0) 62%);}
+/* ::after はキャプションより後に描画されるため、z-index を持たせないと
+   文字が暗幕の下に潜ってしまう */
+.searchhero-photo .cap{position:absolute;left:18px;right:18px;bottom:13px;z-index:1;color:#fff;
+  font-size:0.82rem;font-weight:600;letter-spacing:0.02em;
+  text-shadow:0 1px 3px rgba(0,0,0,.45);}
 .sform{margin-top:22px;border:1px solid var(--line-strong);border-radius:var(--radius-m);
   background:var(--surface-alt);overflow:hidden;}
 .sform-row{display:grid;grid-template-columns:112px 1fr;border-bottom:1px solid var(--line);}
@@ -744,6 +751,8 @@ table{border-collapse:collapse;width:100%;}
   .jstory-catch{font-size:1.06rem;}
   .jstory-in{padding:18px;}
   .jstory-photo{aspect-ratio:16/9;}
+  /* スマホでは21:6だと100pxしかなく写真の存在感が消えるため、少し高くする */
+  .searchhero-photo{aspect-ratio:16/7;}
   .sform-row{grid-template-columns:1fr;}
   .sform-row>.k{border-right:0;border-bottom:1px solid var(--line);padding:10px 14px;}
   .sform-row>.v{padding:10px 14px;}
