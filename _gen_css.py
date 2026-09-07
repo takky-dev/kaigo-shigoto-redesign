@@ -175,6 +175,31 @@ table{border-collapse:collapse;width:100%;}
 .rail-track::-webkit-scrollbar{height:8px;}
 .rail-track::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px;}
 
+/* ==================================================== 前職 → 介護 の橋渡し */
+.bridge{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.bcard{display:grid;grid-template-columns:37% 63%;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;
+  text-decoration:none;color:var(--ink);}
+.bcard:hover{box-shadow:var(--shadow-lift);border-color:var(--line-strong);}
+.b-from{position:relative;background:var(--bg-alt);padding:18px 20px 18px 18px;
+  display:flex;flex-direction:column;justify-content:center;gap:6px;}
+.b-from::after{content:"";position:absolute;right:-11px;top:50%;transform:translateY(-50%);
+  border-top:11px solid transparent;border-bottom:11px solid transparent;
+  border-left:11px solid var(--bg-alt);z-index:1;}
+.b-label{font-size:0.68rem;letter-spacing:0.1em;color:var(--ink-faint);}
+.b-name{font-family:var(--font-head);font-weight:700;font-size:0.9rem;line-height:1.5;
+  color:var(--ink-soft);word-break:auto-phrase;}
+.b-to{padding:18px 20px;display:flex;flex-direction:column;gap:7px;}
+.b-to .b-label{color:var(--accent);font-weight:700;}
+.b-gain{font-family:var(--font-head);font-weight:700;font-size:1rem;line-height:1.55;
+  color:var(--accent-strong);}
+.b-why{font-size:0.79rem;color:var(--ink-soft);line-height:1.7;}
+.b-foot{margin-top:auto;padding-top:9px;border-top:1px dashed var(--line);
+  font-size:0.74rem;color:var(--ink-faint);display:flex;flex-wrap:wrap;gap:8px;
+  align-items:baseline;}
+.b-foot b{font-family:var(--font-num);color:var(--warm-strong);font-size:0.92rem;
+  margin-left:auto;}
+
 /* ========================================================= 職種ガイド（A用） */
 .guidegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .guide{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);
@@ -634,6 +659,7 @@ table{border-collapse:collapse;width:100%;}
   .foot-cols{grid-template-columns:1fr 1fr;}
   .guidegrid,.shisetsu-grid,.colgrid{grid-template-columns:repeat(2,1fr);}
   .gallery{grid-template-columns:repeat(3,1fr);}
+  .bridge{grid-template-columns:1fr;}
 }
 @media (max-width:720px){
   body{font-size:14.5px;}
@@ -644,6 +670,11 @@ table{border-collapse:collapse;width:100%;}
   .yakinhero-tail{height:38px;}
   .coverage{grid-template-columns:1fr;}
   .guidegrid,.shisetsu-grid,.colgrid,.voicegrid,.relgrid,.rankgrid{grid-template-columns:1fr;}
+  .bcard{grid-template-columns:1fr;}
+  .b-from{padding:13px 16px;flex-direction:row;align-items:baseline;gap:10px;}
+  .b-from::after{right:auto;left:22px;top:auto;bottom:-11px;transform:none;
+    border-left:11px solid transparent;border-right:11px solid transparent;
+    border-top:11px solid var(--bg-alt);border-bottom:0;}
   .rankgrid{gap:0;}
   .jrow-grid{grid-template-columns:repeat(2,1fr);}
   .jrow-cell:nth-child(2){border-right:0;}

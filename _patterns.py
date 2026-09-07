@@ -16,7 +16,7 @@ PATTERNS = {
         # --- 構成 ---
         "hero": "yakin",
         "card": "dense",
-        "sections": ["yakin", "coverage", "matrix", "rails", "shokushu_guide", "columns", "faq", "cta"],
+        "sections": ["yakin", "prevjob", "coverage", "matrix", "rails", "shokushu_guide", "columns", "faq", "cta"],
         "rails": ["yakin-none", "shikaku", "mikeiken"],
         "voice": False,
         "souba": False,
@@ -119,7 +119,7 @@ PATTERNS = {
         # --- 構成 ---
         "hero": "search",
         "card": "table",
-        "sections": ["popular", "souba", "table_jobs", "matrix", "area", "coverage", "columns", "faq", "cta"],
+        "sections": ["popular", "souba", "prevjob", "table_jobs", "matrix", "area", "coverage", "columns", "faq", "cta"],
         "rails": [],
         "voice": True,
         "souba": True,

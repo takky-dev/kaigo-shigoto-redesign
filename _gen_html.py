@@ -313,8 +313,8 @@ def hero_yakin():
     <img src="{img('hero-a-yakin.jpg')}" alt="" loading="eager">
   </div>
   <div class="wrap yakinhero-in">
-    <h1>介護の求人は、夜勤をどうするかで<br>選べる範囲が変わります。</h1>
-    <p class="h-sub">{e(D.TAGLINE)}。まず夜勤の条件を決めてから、職種と施設種別で絞り込めます。会員登録は不要で、掲載施設へ直接応募いただけます。</p>
+    <h1>夜勤を続けるか、やめるか。<br>そこから決めていいと思います。</h1>
+    <p class="h-sub">夜勤の回数で、月収は2〜4万円変わります。体を優先するか、手当を取るか。先にそこを決めてしまえば、見るべき求人は3分の1になります。会員登録は不要、気になった施設へ直接応募できます。</p>
     <div class="h-meta">
       <span>掲載求人 {fmt(D.TOTAL_JOBS)}件</span>
       <span>掲載事業所 {fmt(D.TOTAL_COMPANIES)}法人</span>
@@ -338,8 +338,8 @@ def hero_timeline():
     return f"""<section class="timelinehero">
   <div class="wrap thero-grid">
     <div class="thero-copy">
-      <h1>その職場の1日を、<br>応募する前に読めます。</h1>
-      <p class="h-sub">{e(D.TAGLINE)}です。出勤から退勤までの時間割、働いている職員のことば、職種ごとの人数まで、掲載施設に書いてもらった内容をそのまま載せています。会員登録なしで直接応募できます。</p>
+      <h1>「思っていたのと違った」を、<br>もう繰り返さないために。</h1>
+      <p class="h-sub">介護の転職で一番よく聞くのは、入ってから分かったことばかりだった、という話です。だから出勤から退勤までの時間割も、働いている職員のことばも、職種ごとの人数も、掲載施設に書いてもらいました。読んでから決めてください。会員登録は不要です。</p>
       <div class="h-stat">
         <div><b>{fmt(D.TOTAL_JOBS)}</b>掲載求人</div>
         <div><b>{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</div>
@@ -388,8 +388,8 @@ def hero_search():
     )
     return f"""<section class="searchhero">
   <div class="wrap">
-    <h1>介護の求人を、条件で絞り込んで比べる。</h1>
-    <p class="h-sub">{e(D.TAGLINE)}。職種・エリア・雇用形態に加えて、夜勤の有無や資格支援など25の条件で絞り込めます。会員登録は不要です。</p>
+    <h1>今の条件より、いいところはあるのか。<br>並べて確かめてください。</h1>
+    <p class="h-sub">基本給・処遇改善手当・資格手当・夜勤手当を分けて掲載しています。額面だけでは分からない差が、同じ並びで比較できます。夜勤の有無や資格支援など25の条件で絞り込めます。会員登録は不要です。</p>
     <div class="h-stat">
       <span><b>{fmt(D.TOTAL_JOBS)}</b>掲載求人</span>
       <span><b>{fmt(D.TOTAL_COMPANIES)}</b>掲載法人</span>
@@ -440,8 +440,8 @@ def sec_coverage(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">掲載情報の充実度</span>
-      <h2>求人票に何がどこまで書かれているか</h2>
-      <p class="lede">応募前に判断できるように、掲載施設に記入をお願いしている項目です。任意項目のためすべての求人に揃うわけではありませんが、どの求人に何が載っているかは一覧で確認できます。</p>
+      <h2>入ってから「聞いてない」が<br>起きないように</h2>
+      <p class="lede">求人票と実際が違った、というのは介護の転職で一番多い後悔です。だから条件面だけでなく、次の項目まで掲載施設に書いてもらっています。任意項目のためすべての求人に揃うわけではありませんが、どの求人に何が載っているかは一覧で分かります。</p>
     </div>
     <div class="coverage">{''.join(cells)}</div>
   </div>
@@ -469,8 +469,8 @@ def sec_matrix(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">職種 × 施設種別</span>
-      <h2>探している職種が、どの施設に何件あるか</h2>
-      <p class="lede">介護の求人は「職種」と「施設種別」の2軸で決まります。組み合わせごとの件数から、そのまま該当する求人一覧に進めます。訪問介護に生活相談員がいないなど、制度上組み合わせが成立しない欄は「—」と表示しています。</p>
+      <h2>同じ介護職でも、<br>施設が変われば別の仕事です</h2>
+      <p class="lede">特養の介護職とデイの介護職では、夜勤の有無も、体への負担も、覚えることも違います。「介護職」で一括りにせず、職種と施設の組み合わせごとに何件あるかを出しました。数字からそのまま求人一覧に進めます。制度上ありえない組み合わせは「—」です。</p>
     </div>
     <div class="matrixwrap"><table class="matrix">
       <caption class="sr-only">職種と施設種別の組み合わせごとの求人件数</caption>
@@ -500,11 +500,52 @@ def sec_rails(p):
     return f"""<section class="band band-tint">
   <div class="wrap">
     <div class="band-head">
-      <span class="eyebrow">切り口から探す</span>
-      <h2>条件と掲載内容で束ねた求人</h2>
-      <p class="lede">カテゴリではなく、求人が実際に満たしている条件と、求人票にどこまで書かれているかで並べています。</p>
+      <span class="eyebrow">気になっていることから</span>
+      <h2>いま一番引っかかっている点は<br>どれですか</h2>
+      <p class="lede">「夜勤なしで探したい」「未経験でも本当に大丈夫か」「資格を取った分が給与に出るのか」。カテゴリではなく、応募前に確かめたくなる点ごとに求人をまとめました。</p>
     </div>
     {''.join(blocks)}
+  </div>
+</section>"""
+
+
+def sec_prevjob(p):
+    """前職 → 介護 の橋渡し。応募者が「いま持っているもの」を先に言語化する。"""
+    if p["card"] == "table":
+        rows = "".join(f"""<tr>
+      <th scope="row">{e(b['from_'])}</th>
+      <td>{e(b['gain'])}</td>
+      <td>{e(b['fit'])}</td>
+      <td class="n"><a href="list.html">{fmt(b['count'])}件</a></td>
+    </tr>""" for b in D.PREV_JOBS)
+        inner = f"""<div class="soubawrap"><table class="souba">
+      <caption class="sr-only">前職ごとに、介護で活きる経験と相性のいい職場</caption>
+      <thead><tr><th scope="col">前職</th><th scope="col">介護で活きる経験</th>
+        <th scope="col">相性のいい職場</th><th scope="col">求人数</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table></div>"""
+    else:
+        cards = "".join(f"""<a class="bcard" href="list.html">
+      <span class="b-from">
+        <span class="b-label">前職</span>
+        <span class="b-name">{e(b['from_'])}</span>
+      </span>
+      <span class="b-to">
+        <span class="b-label">介護では</span>
+        <span class="b-gain">{e(b['gain'])}</span>
+        <span class="b-why">{e(b['why'])}</span>
+        <span class="b-foot">相性のいい職場：{e(b['fit'])}<b>{fmt(b['count'])}件</b></span>
+      </span>
+    </a>""" for b in D.PREV_JOBS)
+        inner = f'<div class="bridge">{cards}</div>'
+    return f"""<section class="band band-surface">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">前職から探す</span>
+      <h2>介護が未経験でも、<br>ゼロからではありません</h2>
+      <p class="lede">介護に入る人の3人に1人は他業種からです。前職で身についたものは、介護の現場でそのまま値段のつく力になります。今の経験がどこで効くのかから見てください。</p>
+    </div>
+    {inner}
   </div>
 </section>"""
 
@@ -521,8 +562,8 @@ def sec_shokushu_guide(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">職種から探す</span>
-      <h2>介護施設で働く6つの職種</h2>
-      <p class="lede">介護職員だけでなく、生活相談員・ケアマネージャー・サービス提供責任者・施設長・施設内看護師まで扱っています。平均月給は本サイト掲載求人の集計値（デモ用サンプル）です。</p>
+      <h2>今の資格と経験で、<br>どこまで狙えるか</h2>
+      <p class="lede">介護職から始めて、相談員・ケアマネージャー・管理者へ進む人が多い業界です。それぞれ必要な資格と平均月給を並べました。今すぐ届く職種と、数年後に狙う職種を分けて見てください。平均月給は本サイト掲載求人の集計値（デモ用サンプル）です。</p>
     </div>
     <div class="guidegrid">{''.join(cards)}</div>
   </div>
@@ -545,8 +586,8 @@ def sec_shisetsu(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">施設種別から探す</span>
-      <h2>働く場所によって、1日の流れは変わります</h2>
-      <p class="lede">同じ介護職でも、入居施設と日帰り・訪問では働き方が大きく違います。夜勤の有無とあわせてご覧ください。</p>
+      <h2>どこで働くかで、<br>1日の過ごし方は変わります</h2>
+      <p class="lede">入居施設は夜勤があるかわりに同じ方をずっと見ていけます。デイは夜勤がないかわりに送迎があります。訪問は一人で動く時間が長くなります。合う・合わないは、ここでだいぶ決まります。</p>
     </div>
     <div class="shisetsu-grid">{''.join(cards)}</div>
   </div>
@@ -571,8 +612,8 @@ def sec_voices(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">利用した方の声</span>
-      <h2>この仕事に移った人が、何を見て決めたか</h2>
-      <p class="lede">本サイトを使って転職した方に伺った内容です。</p>
+      <h2>同じところで迷った人が、<br>最後に何を見て決めたか</h2>
+      <p class="lede">未経験から、夜勤ありの職場から、病院から。いまのあなたと近い状況だった方に伺った話です。</p>
     </div>
     <div class="voicegrid">{''.join(boxes)}</div>
     <p class="voice-note">※本ページはデザイン提案用のデモです。掲載している声はすべて架空のサンプルであり、実在の人物のものではありません。</p>
@@ -586,8 +627,8 @@ def sec_story_jobs(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">掲載中の求人</span>
-      <h2>1日の流れか、働く人の声が読める求人</h2>
-      <p class="lede">求人票の条件だけでなく、実際にどう働くのかが書かれている求人を先に並べています。</p>
+      <h2>読んでから決められる求人</h2>
+      <p class="lede">休憩は取れているのか、記録に何時間かかるのか、夜勤明けは何時に帰れるのか。条件表だけでは分からない部分を施設に書いてもらった求人を、先に並べています。</p>
     </div>
     {''.join(card_story(j) for j in jobs)}
     <p class="band-more"><a class="btn btn-ghost" href="list.html">すべての求人を見る（{fmt(D.TOTAL_JOBS)}件）</a></p>
@@ -600,8 +641,8 @@ def sec_table_jobs(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">新着求人</span>
-      <h2>更新日の新しい順に{len(D.JOBS)}件</h2>
-      <p class="lede">給与・夜勤・勤務地・掲載情報の有無を同じ並びで比較できます。</p>
+      <h2>同じ並びで、まとめて比べる</h2>
+      <p class="lede">給与・夜勤・勤務地・掲載情報の有無を横一列に揃えています。1件ずつ開いて戻る手間なく、条件の差だけを追えます。更新日の新しい順に{len(D.JOBS)}件。</p>
     </div>
     {table_jobs(sorted(D.JOBS, key=lambda j: j['posted_days']))}
     <p class="band-more"><a class="btn btn-ghost" href="list.html">すべての求人を見る（{fmt(D.TOTAL_JOBS)}件）</a></p>
@@ -623,8 +664,8 @@ def sec_popular(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">人気の条件</span>
-      <h2>よく指定されている絞り込み条件</h2>
-      <p class="lede">本サイトで実際に選ばれている条件を、指定回数の多い順に並べています。</p>
+      <h2>他の人は、まず何で絞っているか</h2>
+      <p class="lede">本サイトで実際に指定されている条件を、多い順に並べました。上位に「夜勤なし」と「日勤のみ」が並ぶのが介護の求人検索の特徴です。</p>
     </div>
     <div class="rankgrid">{''.join(ranks)}</div>
   </div>
@@ -649,8 +690,8 @@ def sec_souba(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">資格別の給与相場</span>
-      <h2>介護は、保有資格が給与にそのまま出る</h2>
-      <p class="lede">本サイトの掲載求人から、資格ごとの平均月給・平均年収を集計しています。無資格から介護支援専門員まで、月給ベースでおよそ10万円の幅があります。</p>
+      <h2>今の資格でいくらが相場か。<br>次の資格でいくら上がるか。</h2>
+      <p class="lede">介護は保有資格が手当として給与にそのまま出る業界です。無資格から介護支援専門員まで、月給ベースでおよそ10万円の幅があります。いま提示されている額が相場に対してどうかを、ここで確かめてください。</p>
     </div>
     <div class="soubawrap"><table class="souba">
       <caption class="sr-only">資格別の平均月給・平均年収・求人件数</caption>
@@ -690,7 +731,7 @@ def sec_columns(p):
   <div class="wrap">
     <div class="band-head">
       <span class="eyebrow">お仕事コラム</span>
-      <h2>求人を見る前に読んでおきたいこと</h2>
+      <h2>迷っている間に、<br>読んでおくと早いこと</h2>
     </div>
     <div class="colgrid">{cards}</div>
     <p class="band-more"><a class="btn btn-ghost" href="column.html">コラム一覧を見る</a></p>
@@ -717,8 +758,8 @@ def sec_faq(p):
 def sec_cta(p):
     return f"""<section class="ctaband">
   <div class="wrap">
-    <h2>会員登録なしで、そのまま応募できます</h2>
-    <p>スカウトメールも、アドバイザーからの電話もありません。気になった求人に、その場で直接応募いただけます。</p>
+    <h2>迷っている段階で、応募して大丈夫です</h2>
+    <p>会員登録も、アドバイザーとの面談も、営業電話もありません。応募後に届くのは、応募した施設からの連絡だけです。聞きたいことがあれば、応募フォームの質問欄に書いてください。</p>
     <div class="btns">
       <a class="btn btn-main" href="list.html">求人を探す</a>
       <a class="btn btn-ghost" href="faq.html">応募の流れを見る</a>
@@ -730,6 +771,7 @@ def sec_cta(p):
 SECTION_FN = {
     "yakin": lambda p: "",  # ヒーローで出力済み
     "coverage": sec_coverage,
+    "prevjob": sec_prevjob,
     "matrix": sec_matrix,
     "rails": sec_rails,
     "shokushu_guide": sec_shokushu_guide,
